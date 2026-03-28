@@ -58,15 +58,23 @@ key={batch.batchId}
 className="bg-[#083d34] p-6 rounded-xl"
 >
 
-<div className="flex justify-between items-center">
+<div className="flex justify-between items-start">
 
-<div>
+<div className="flex-1">
 
 <p><b>Batch ID :</b> {batch.batchId}</p>
 <p><b>Herb :</b> {batch.herbName}</p>
 <p><b>Farmer :</b> {batch.farmer}</p>
 <p><b>Location :</b> {batch.location}</p>
 <p><b>Packets :</b> {batch.packetCount}</p>
+
+{(batch.latitude && batch.longitude) && (
+<div className="mt-3 p-3 bg-[#062f27] rounded border border-green-600 text-sm">
+<p className="text-green-400 font-semibold mb-1">📍 GPS Coordinates</p>
+<p className="text-white">Lat: <b>{batch.latitude.toFixed(6)}</b></p>
+<p className="text-white">Lon: <b>{batch.longitude.toFixed(6)}</b></p>
+</div>
+)}
 
 </div>
 

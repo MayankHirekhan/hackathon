@@ -120,24 +120,29 @@ export default function TracePage(){
  </div>
 
 
- {/* GPS */}
+ {/* GPS & COORDINATES */}
 
- {batch.geoImage &&(
+ <div className="mt-6 space-y-4">
 
- <div className="mt-6">
+ {(batch.latitude && batch.longitude) && (
+  <div className="bg-[#062c21] p-4 rounded-lg border border-green-600">
+   <p className="text-green-400 font-semibold mb-2">📍 GPS Coordinates</p>
+   <p className="text-white text-sm">Latitude: <b>{batch.latitude.toFixed(6)}</b></p>
+   <p className="text-white text-sm">Longitude: <b>{batch.longitude.toFixed(6)}</b></p>
+  </div>
+ )}
 
- <p className="text-green-400 mb-2">
- Farm GPS Location
- </p>
-
- <img
- src={batch.geoImage}
- className="rounded-lg border border-green-700 w-full max-w-xl"
- />
+ {batch.geoImage && (
+  <div>
+   <p className="text-green-400 font-semibold mb-2">🗺️ Farm Location Map</p>
+   <img
+    src={batch.geoImage}
+    className="rounded-lg border border-green-700 w-full max-w-xl"
+   />
+  </div>
+ )}
 
  </div>
-
- )}
 
 
  {/* BLOCKCHAIN */}

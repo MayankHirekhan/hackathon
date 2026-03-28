@@ -1,1 +1,19 @@
 @import "leaflet/dist/leaflet.css";
+
+/* HTML5 QR Code styles */
+#qr-reader {
+  width: 100% !important;
+  border: none !important;
+}
+
+#qr-reader__dashboard {
+  display: none !important;
+}
+
+#qr-reader__status_span {
+  display: none !important;
+}
+
+#qr-reader__close_button {
+  display: none !important;
+}

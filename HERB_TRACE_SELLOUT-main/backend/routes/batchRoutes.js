@@ -109,13 +109,13 @@ router.post("/batches", async (req,res)=>{
    lastBlock ? lastBlock.hash : "GENESIS"
 
 
-  /* GOOGLE MAP IMAGE */
+  /* OPENSTREETMAP IMAGE (FREE - NO API KEY NEEDED) */
 
   const lat = latitude || 0
   const lon = longitude || 0
 
   const geoImage =
-  `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=15&size=600x300&markers=color:red%7C${lat},${lon}`
+  `https://static.openstreetmap.de/staticmap.php?center=${lat},${lon}&zoom=15&size=600x300&markers=${lat},${lon},red-pushpin`
 
 
   /* CREATE BLOCK */

@@ -197,4 +197,69 @@ router.get("/supplier/batches/:supplierId", async(req,res)=>{
 
 })
 
+/* ===============================
+   SUPPLIER INVENTORY - FARMER INVENTORY
+=============================== */
+
+router.get("/supplier/batches/farmer-inventory/:supplierId", async(req,res)=>{
+
+ try{
+
+  const { supplierId } = req.params
+
+  // Get all batches received by this supplier (status = "received")
+  const farmerInventory = await Batch.find({
+   supplierId: supplierId,
+   status: "received"
+  }).select("batchId herbName quantity unit harvestDate status farmer farmerId supplierProcessedDate latitude longitude geoImage").lean()
+
+  return res.json({
+   success: true,
+   count: farmerInventory.length,
+   data: farmerInventory
+  })
+
+ }catch(err){
+  console.error("Farmer inventory fetch error:", err)
+  return res.status(500).json({
+   success: false,
+   message: "Failed to fetch farmer inventory"
+  })
+ }
+
+})
+
+/* ===============================
+   SUPPLIER INVENTORY - LAB EXPORT
+=============================== */
+
+router.get("/supplier/batches/lab-export/:supplierId", async(req,res)=>{
+
+ try{
+
+  const { supplierId } = req.params
+
+  // Get all batches that passed lab tests (status = "tested" and labTested = true)
+  const labExportInventory = await Batch.find({
+   supplierId: supplierId,
+   status: "tested",
+   labTested: true
+  }).select("batchId herbName quantity unit harvestDate status labName labResult labTestDate latitude longitude geoImage").lean()
+
+  return res.json({
+   success: true,
+   count: labExportInventory.length,
+   data: labExportInventory
+  })
+
+ }catch(err){
+  console.error("Lab export inventory fetch error:", err)
+  return res.status(500).json({
+   success: false,
+   message: "Failed to fetch lab export inventory"
+  })
+ }
+
+})
+
 module.exports = router

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import DatePickerField from "@/components/DatePickerField"
 
 export default function CreateHarvest(){
 
@@ -45,10 +46,10 @@ export default function CreateHarvest(){
     setLatitude(lat)
     setLongitude(lon)
 
-    /* GOOGLE STATIC MAP */
+    /* OPENSTREETMAP IMAGE (FREE - NO API KEY NEEDED) */
 
     const map =
-    `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=16&size=700x400&markers=color:red%7C${lat},${lon}`
+    `https://static.openstreetmap.de/staticmap.php?center=${lat},${lon}&zoom=15&size=600x300&markers=${lat},${lon},red-pushpin`
 
     setGeoImage(map)
 
@@ -191,25 +192,12 @@ export default function CreateHarvest(){
    HARVEST DATE
 ====================== */}
 
- <div className="space-y-2">
-
- <label className="text-sm text-gray-300">
- Harvest Date
- </label>
-
- <input
- type="date"
- className="w-full p-3 rounded bg-[#041f17] border border-green-700"
- value={harvestDate}
- onChange={e=>setHarvestDate(e.target.value)}
+ <DatePickerField
+  label="Harvest Date"
+  value={harvestDate}
+  onChange={(date) => setHarvestDate(date)}
  />
 
- </div>
-
-
-{/* ======================
-   DETECT LOCATION BUTTON
-====================== */}
 
  <button
  onClick={detectLocation}
@@ -220,21 +208,27 @@ export default function CreateHarvest(){
 
 
 {/* ======================
-   MAP PREVIEW
+   COORDINATES & MAP PREVIEW
 ====================== */}
 
- {geoImage &&(
+ {(latitude && longitude) &&(
 
- <div className="bg-[#041f17] p-4 rounded-lg space-y-2">
+ <div className="bg-[#041f17] p-4 rounded-lg space-y-3">
 
- <p className="text-green-400 text-sm">
- Farm GPS Location Detected
- </p>
+ <div className="bg-[#062c21] p-3 rounded border border-green-600">
+  <p className="text-green-400 font-semibold text-sm mb-2">📍 GPS Coordinates</p>
+  <p className="text-white text-sm">Latitude: <b>{latitude.toFixed(6)}</b></p>
+  <p className="text-white text-sm">Longitude: <b>{longitude.toFixed(6)}</b></p>
+ </div>
 
- <img
- src={geoImage}
- className="rounded-lg w-full"
- />
+ <p className="text-green-400 text-sm font-semibold">🗺️ Farm GPS Location</p>
+
+ {geoImage && (
+  <img
+   src={geoImage}
+   className="rounded-lg w-full border border-green-600"
+  />
+ )}
 
  </div>
 

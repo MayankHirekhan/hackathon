@@ -147,6 +147,21 @@ export default function Harvests(){
  <p>Quantity : {batch.quantity} kg</p>
  <p>Location : {batch.location}</p>
 
+ {(batch.latitude && batch.longitude) && (
+  <div className="mt-3 p-3 bg-[#041f17] rounded border border-green-600 text-sm">
+   <p className="text-green-400 font-semibold mb-2">📍 GPS Coordinates</p>
+   <p className="text-white">Lat: <b>{batch.latitude.toFixed(6)}</b></p>
+   <p className="text-white">Lon: <b>{batch.longitude.toFixed(6)}</b></p>
+  </div>
+ )}
+
+ {batch.geoImage && (
+  <img
+   src={batch.geoImage}
+   className="mt-3 rounded border border-green-600 w-full"
+   alt="Farm location map"
+  />
+ )}
 
  <div className="mt-4 bg-[#041f17] p-3 rounded text-xs">
 

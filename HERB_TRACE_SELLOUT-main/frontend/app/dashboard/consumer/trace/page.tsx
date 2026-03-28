@@ -247,22 +247,27 @@ Herb Information
 
 </div>
 
+<div className="mt-4 space-y-4">
+
+{(data.latitude && data.longitude) && (
+<div className="bg-[#062c21] p-4 rounded-lg border border-green-600">
+<p className="text-green-400 font-semibold mb-2">📍 GPS Coordinates</p>
+<p className="text-white text-sm">Latitude: <b>{data.latitude.toFixed(6)}</b></p>
+<p className="text-white text-sm">Longitude: <b>{data.longitude.toFixed(6)}</b></p>
+</div>
+)}
+
 {data.geoImage &&(
-
 <div>
-
-<p className="text-green-400 mt-4">
-Farm Location
-</p>
-
+<p className="text-green-400 font-semibold mb-2">🗺️ Farm Location Map</p>
 <img
 src={data.geoImage}
-className="rounded border border-green-700 mt-2"
+className="rounded border border-green-700 w-full"
 />
+</div>
+)}
 
 </div>
-
-)}
 
 <div className="mt-4">
 
