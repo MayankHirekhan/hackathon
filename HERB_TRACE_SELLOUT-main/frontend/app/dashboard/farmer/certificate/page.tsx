@@ -72,7 +72,7 @@ export default function CertificatePage(){
  <div className="text-center mb-8">
 
  <h1 className="text-3xl font-bold text-emerald-900">
- HERBTRACKING AUTHORITY
+ HerbTracking Authority
  </h1>
 
  <p className="text-emerald-700 text-sm">

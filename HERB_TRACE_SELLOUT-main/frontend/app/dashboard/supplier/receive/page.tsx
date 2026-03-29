@@ -239,14 +239,14 @@ export default function ReceivePage(){
 
    }else{
 
-    setMessage(`❌ ${data.message}`)
+    setMessage(`❌ Batch receipt failed: ${data.message}`)
 
    }
 
   }catch(err){
 
    console.error(err)
-   setMessage("❌ Server error")
+   setMessage("❌ Batch receipt failed: server error")
 
   }
 
