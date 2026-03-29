@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Html5QrcodeScanner } from "html5-qrcode"
+import { Html5QrcodeScanner, Html5QrcodeSupportedFormats } from "html5-qrcode"
 
 export default function ReceivePage(){
 
@@ -82,17 +82,14 @@ export default function ReceivePage(){
      qrbox: { width: 300, height: 300 },
      aspectRatio: 1.0,
      disableFlip: false,
-     formatsToSupport: ['QR_CODE'],
+     formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
      experimentalFeatures: {
       useBarCodeDetectorIfSupported: true
      },
      videoConstraints: {
       facingMode: "environment",
       width: { min: 360, ideal: 1280, max: 1920 },
-      height: { min: 360, ideal: 720, max: 1080 },
-      focusMode: ["continuous", "auto", "single-shot"],
-      focusDistance: 0,
-      zoom: 1.0
+      height: { min: 360, ideal: 720, max: 1080 }
      }
     },
     false
