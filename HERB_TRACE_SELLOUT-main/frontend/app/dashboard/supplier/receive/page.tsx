@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Html5QrcodeScanner, Html5QrcodeSupportedFormats } from "html5-qrcode"
+import { Html5QrcodeScanner } from "html5-qrcode"
 
 export default function ReceivePage(){
 
@@ -82,7 +82,6 @@ export default function ReceivePage(){
      qrbox: { width: 300, height: 300 },
      aspectRatio: 1.0,
      disableFlip: false,
-     formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
      experimentalFeatures: {
       useBarCodeDetectorIfSupported: true
      },
@@ -239,7 +238,7 @@ export default function ReceivePage(){
 
    }else{
 
-    setMessage(`❌ Batch receipt failed: ${data.message || "Unknown error"}`)
+    setMessage(`❌ Batch receipt failed: ${data.message || "Unknown error"}. Please verify the batch ID and try again.`)
 
    }
 
