@@ -239,7 +239,7 @@ export default function ReceivePage(){
 
    }else{
 
-    setMessage(`❌ Batch receipt failed: ${data.message}`)
+    setMessage(`❌ Batch receipt failed: ${data.message || "Unknown error"}`)
 
    }
 

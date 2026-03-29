@@ -21,7 +21,7 @@ export default function Home(){
 
    <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
     <div>
-     <p className="text-xs uppercase tracking-[0.3em] text-emerald-600">HerbTracking • Bharat</p>
+     <p className="text-xs uppercase tracking-[0.2em] text-emerald-600">HerbTracking • Bharat</p>
      <h1 className="text-4xl md:text-5xl font-bold text-emerald-900 mt-3">
       Track every herb from farm to pharmacy.
      </h1>
