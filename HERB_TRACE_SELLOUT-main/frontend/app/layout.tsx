@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "HerbTrace",
-  description: "Blockchain Herbal Supply Chain Traceability",
+  title: "HerbTracking",
+  description: "Green supply chain visibility for India’s herbal ecosystem",
 };
 
 export default function RootLayout({
@@ -25,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-[#041f1a] text-white antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-emerald-50 text-emerald-950 antialiased`}
       >
         {children}
       </body>

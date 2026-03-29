@@ -21,20 +21,14 @@ export default function SupplierDashboard(){
    return
   }
 
-  /* LOAD SUPPLIER PROFILE */
-
   fetch(`${API}/api/supplier/${supplierId}`)
   .then(res=>res.json())
   .then(data=>setSupplier(data))
-
-  /* LOAD HERB PROCESSING DATA */
 
   fetch(`${API}/api/analytics/herbs`)
   .then(res=>res.json())
   .then(data=>setHerbData(data))
   .catch(()=>setHerbData([]))
-
-  /* LOAD SUPPLIER COMPARISON DATA */
 
   fetch(`${API}/api/analytics/suppliers`)
   .then(res=>res.json())
@@ -44,45 +38,51 @@ export default function SupplierDashboard(){
  },[])
 
  if(!supplier){
-  return <p className="text-white p-10">Loading Supplier Data...</p>
+  return <p className="text-emerald-700 p-10">Loading Supplier Data...</p>
  }
 
  return(
 
  <div className="space-y-8">
 
-  <h1 className="text-3xl font-bold text-green-400">
-   Supplier Dashboard
-  </h1>
+  <div className="flex flex-wrap items-center justify-between gap-4">
+   <div>
+    <h1 className="text-3xl font-bold text-emerald-900">
+     Supplier Dashboard
+    </h1>
+    <p className="text-sm text-emerald-700">
+     Track processing KPIs and supply readiness for export and retail.
+    </p>
+   </div>
+   <div className="bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-2 text-sm text-emerald-700">
+    License: {supplier.licenseNumber}
+   </div>
+  </div>
 
   {/* PROFILE */}
 
-  <div className="bg-[#083d34] p-6 rounded-xl flex items-center gap-6">
+  <div className="bg-white p-6 rounded-2xl flex flex-wrap items-center gap-6 border border-emerald-100 shadow-sm">
 
    <img
     src={`http://localhost:5000${supplier.profilePhoto}`}
-    className="w-24 h-24 rounded-full border-4 border-green-400"
+    className="w-24 h-24 rounded-full border-2 border-emerald-200"
    />
 
-   <div>
+   <div className="space-y-1">
 
-    <h2 className="text-2xl font-bold text-white">
+    <h2 className="text-2xl font-bold text-emerald-900">
      {supplier.name}
     </h2>
 
-    <p className="text-green-300">
+    <p className="text-emerald-600">
      ⭐ {supplier.rating}/5
     </p>
 
-    <p className="text-gray-300">
+    <p className="text-emerald-800">
      {supplier.companyName}
     </p>
 
-    <p className="text-gray-400 text-sm">
-     License: {supplier.licenseNumber}
-    </p>
-
-    <p className="text-gray-400 text-sm">
+    <p className="text-emerald-600 text-sm">
      Location: {supplier.location}
     </p>
 
@@ -93,32 +93,32 @@ export default function SupplierDashboard(){
 
   {/* STATS */}
 
-  <div className="grid grid-cols-4 gap-6">
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-   <div className="bg-[#083d34] p-6 rounded-xl">
-    <p className="text-gray-300">Batches Received</p>
-    <h2 className="text-2xl text-green-400 font-bold">
+   <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+    <p className="text-emerald-600">Batches Received</p>
+    <h2 className="text-2xl text-emerald-900 font-bold">
      {supplier.totalBatchesReceived}
     </h2>
    </div>
 
-   <div className="bg-[#083d34] p-6 rounded-xl">
-    <p className="text-gray-300">Processed Herbs</p>
-    <h2 className="text-2xl text-green-400 font-bold">
+   <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+    <p className="text-emerald-600">Processed Herbs</p>
+    <h2 className="text-2xl text-emerald-900 font-bold">
      {supplier.processedHerbs} kg
     </h2>
    </div>
 
-   <div className="bg-[#083d34] p-6 rounded-xl">
-    <p className="text-gray-300">Inventory Stock</p>
-    <h2 className="text-2xl text-green-400 font-bold">
+   <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+    <p className="text-emerald-600">Inventory Stock</p>
+    <h2 className="text-2xl text-emerald-900 font-bold">
      {supplier.inventoryStock} kg
     </h2>
    </div>
 
-   <div className="bg-[#083d34] p-6 rounded-xl">
-    <p className="text-gray-300">Experience</p>
-    <h2 className="text-2xl text-green-400 font-bold">
+   <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+    <p className="text-emerald-600">Experience</p>
+    <h2 className="text-2xl text-emerald-900 font-bold">
      {supplier.experience} yrs
     </h2>
    </div>
@@ -128,7 +128,7 @@ export default function SupplierDashboard(){
 
   {/* CHARTS */}
 
-  <div className="grid grid-cols-2 gap-6">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
    <SupplierCharts data={herbData} />
 

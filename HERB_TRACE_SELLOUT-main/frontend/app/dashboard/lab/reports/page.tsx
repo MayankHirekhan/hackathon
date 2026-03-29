@@ -50,118 +50,93 @@ export default function LabReports(){
  }, [API])
 
  if(loading){
-  return <p className="text-white p-10">Loading reports...</p>
+  return <p className="text-emerald-700 p-10">Loading reports...</p>
  }
 
  return(
 
   <div className="space-y-8">
 
-   <h1 className="text-3xl font-bold text-green-400">
-    📊 Lab Reports
-   </h1>
+   <div>
+    <h1 className="text-3xl font-bold text-emerald-900">
+     📊 Lab Reports
+    </h1>
+    <p className="text-sm text-emerald-700">
+     Quality insights, compliance metrics, and audit readiness.
+    </p>
+   </div>
 
-   {/* STATS CARDS */}
+   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-   <div className="grid grid-cols-4 gap-6">
-
-    <div className="bg-[#083d34] p-6 rounded-xl">
-
-     <p className="text-gray-300">Total Batches</p>
-
-     <h2 className="text-3xl text-green-400 font-bold">
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+     <p className="text-emerald-600">Total Batches</p>
+     <h2 className="text-3xl text-emerald-900 font-bold">
       {stats.totalBatches}
      </h2>
-
     </div>
 
-    <div className="bg-[#083d34] p-6 rounded-xl">
-
-     <p className="text-gray-300">Batches Tested</p>
-
-     <h2 className="text-3xl text-blue-400 font-bold">
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+     <p className="text-emerald-600">Batches Tested</p>
+     <h2 className="text-3xl text-emerald-900 font-bold">
       {stats.testedBatches}
      </h2>
-
     </div>
 
-    <div className="bg-[#083d34] p-6 rounded-xl">
-
-     <p className="text-gray-300">Certified</p>
-
-     <h2 className="text-3xl text-yellow-400 font-bold">
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+     <p className="text-emerald-600">Certified</p>
+     <h2 className="text-3xl text-emerald-900 font-bold">
       {stats.certifiedBatches}
      </h2>
-
     </div>
 
-    <div className="bg-[#083d34] p-6 rounded-xl">
-
-     <p className="text-gray-300">Pass Rate</p>
-
-     <h2 className="text-3xl text-green-300 font-bold">
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+     <p className="text-emerald-600">Pass Rate</p>
+     <h2 className="text-3xl text-emerald-900 font-bold">
       {stats.passRate}%
      </h2>
-
     </div>
 
    </div>
 
-   {/* TEST QUALITY METRICS */}
+   <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-   <div className="bg-[#083d34] p-6 rounded-xl">
-
-    <h3 className="text-xl font-bold text-green-400 mb-4">
+    <h3 className="text-lg font-semibold text-emerald-900 mb-4">
      🧬 Quality Metrics
     </h3>
 
-    <div className="space-y-3">
+    <div className="space-y-3 text-sm">
 
-     <div className="flex justify-between">
-
-      <span className="text-gray-300">pH Level Compliance</span>
-
-      <span className="text-green-400 font-bold">98%</span>
-
+     <div className="flex justify-between text-emerald-700">
+      <span>pH Level Compliance</span>
+      <span className="font-bold">98%</span>
      </div>
 
-     <div className="flex justify-between">
-
-      <span className="text-gray-300">Moisture Content Standard</span>
-
-      <span className="text-green-400 font-bold">95%</span>
-
+     <div className="flex justify-between text-emerald-700">
+      <span>Moisture Content Standard</span>
+      <span className="font-bold">95%</span>
      </div>
 
-     <div className="flex justify-between">
-
-      <span className="text-gray-300">Microbial Load Tests</span>
-
-      <span className="text-green-400 font-bold">99%</span>
-
+     <div className="flex justify-between text-emerald-700">
+      <span>Microbial Load Tests</span>
+      <span className="font-bold">99%</span>
      </div>
 
-     <div className="flex justify-between">
-
-      <span className="text-gray-300">Pesticide Residue Tests</span>
-
-      <span className="text-green-400 font-bold">100%</span>
-
+     <div className="flex justify-between text-emerald-700">
+      <span>Pesticide Residue Tests</span>
+      <span className="font-bold">100%</span>
      </div>
 
     </div>
 
    </div>
 
-   {/* RECENT ACTIVITY */}
+   <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-   <div className="bg-[#083d34] p-6 rounded-xl">
-
-    <h3 className="text-xl font-bold text-green-400 mb-4">
+    <h3 className="text-lg font-semibold text-emerald-900 mb-4">
      📌 Recent Activity
     </h3>
 
-    <div className="space-y-2 text-gray-300">
+    <div className="space-y-2 text-emerald-700 text-sm">
 
      <p>✅ All quality standards maintained</p>
 

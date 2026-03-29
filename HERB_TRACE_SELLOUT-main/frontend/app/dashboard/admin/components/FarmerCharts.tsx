@@ -37,72 +37,71 @@ export default function FarmerCharts(){
 
  },[farmer])
 
- return(
+  return(
 
- <div>
+  <div className="space-y-4">
 
- <h2 className="text-xl mb-4">Farmer Analytics</h2>
+  <div className="flex flex-wrap items-center justify-between gap-3">
+   <h2 className="text-xl font-semibold text-emerald-900">Farmer Analytics</h2>
+   <select
+    value={farmer}
+    onChange={(e)=>setFarmer(e.target.value)}
+    className="bg-white border border-emerald-200 rounded-lg px-3 py-2 text-emerald-900 shadow-sm"
+   >
+    {farmers.map(f=>(
+     <option key={f._id}>{f.name}</option>
+    ))}
+   </select>
+  </div>
 
- <select
- value={farmer}
- onChange={(e)=>setFarmer(e.target.value)}
- className="bg-[#041f1a] p-2 mb-4"
- >
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
- {farmers.map(f=>(
- <option key={f._id}>{f.name}</option>
- ))}
+  {/* PERSONAL */}
 
- </select>
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <div className="grid grid-cols-2 gap-6">
+  <h3 className="mb-2 font-semibold text-emerald-800">Personal Harvest</h3>
 
- {/* PERSONAL */}
+  <ResponsiveContainer width="100%" height={300}>
 
- <div className="bg-[#062f27] p-6 rounded">
+  <BarChart data={personal}>
 
- <h3 className="mb-2">Personal Harvest</h3>
+  <XAxis dataKey="herb"/>
+  <YAxis/>
+  <Tooltip/>
+  <Bar dataKey="quantity" fill="#16a34a"/>
 
- <ResponsiveContainer width="100%" height={300}>
+  </BarChart>
 
- <BarChart data={personal}>
+  </ResponsiveContainer>
 
- <XAxis dataKey="herb"/>
- <YAxis/>
- <Tooltip/>
- <Bar dataKey="quantity" fill="#22c55e"/>
+  </div>
 
- </BarChart>
+  {/* COMPARISON */}
 
- </ResponsiveContainer>
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- </div>
+  <h3 className="mb-2 font-semibold text-emerald-800">Farmer Comparison</h3>
 
- {/* COMPARISON */}
+  <ResponsiveContainer width="100%" height={300}>
 
- <div className="bg-[#062f27] p-6 rounded">
+  <BarChart data={comparison}>
 
- <h3 className="mb-2">Farmer Comparison</h3>
+  <XAxis dataKey="name"/>
+  <YAxis/>
+  <Tooltip/>
+  <Bar dataKey="totalHarvest" fill="#22c55e"/>
 
- <ResponsiveContainer width="100%" height={300}>
+  </BarChart>
 
- <BarChart data={comparison}>
+  </ResponsiveContainer>
 
- <XAxis dataKey="name"/>
- <YAxis/>
- <Tooltip/>
- <Bar dataKey="totalHarvest" fill="#22c55e"/>
+  </div>
 
- </BarChart>
+  </div>
 
- </ResponsiveContainer>
+  </div>
 
- </div>
-
- </div>
-
- </div>
-
- )
+  )
 
 }

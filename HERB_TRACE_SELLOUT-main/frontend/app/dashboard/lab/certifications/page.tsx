@@ -33,26 +33,31 @@ export default function Certifications(){
  }, [API])
 
  if(loading){
-  return <p className="text-white p-10">Loading certifications...</p>
+  return <p className="text-emerald-700 p-10">Loading certifications...</p>
  }
 
  return(
 
   <div className="space-y-8">
 
-   <h1 className="text-3xl font-bold text-green-400">
-    ✅ Certifications
-   </h1>
+   <div>
+    <h1 className="text-3xl font-bold text-emerald-900">
+     ✅ Certifications
+    </h1>
+    <p className="text-sm text-emerald-700">
+     Certified batches ready for packaging and export.
+    </p>
+   </div>
 
    {certifications.length === 0 ? (
 
-    <div className="bg-[#083d34] p-6 rounded-xl">
+    <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100">
 
-     <p className="text-gray-300">
+     <p className="text-emerald-700">
       No certifications issued yet
      </p>
 
-     <p className="text-gray-400 text-sm mt-2">
+     <p className="text-emerald-600 text-sm mt-2">
       Complete batch testing to issue certifications
      </p>
 
@@ -66,30 +71,30 @@ export default function Certifications(){
 
       <div
        key={cert._id}
-       className="bg-gradient-to-r from-[#0b3d2f] to-[#083d34] p-6 rounded-xl border border-green-500"
+       className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm"
       >
 
-       <div className="flex justify-between items-start">
+       <div className="flex flex-wrap justify-between items-start gap-4">
 
         <div>
 
-         <h3 className="text-xl font-bold text-green-400">
+         <h3 className="text-xl font-semibold text-emerald-900">
           🏆 {cert.herbName}
          </h3>
 
-         <p className="text-gray-300">
+         <p className="text-emerald-700">
           Batch ID: {cert.batchId}
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-600 text-sm">
           Farmer: {cert.farmer}
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-600 text-sm">
           Quality Grade: A+
          </p>
 
-         <p className="text-yellow-300 text-sm mt-2">
+         <p className="text-emerald-700 text-sm mt-2">
           ✅ Certified & Verified
          </p>
 
@@ -97,17 +102,17 @@ export default function Certifications(){
 
         <div className="text-right">
 
-         <p className="text-green-400 font-bold text-lg">
+         <p className="text-emerald-900 font-bold text-lg">
           ISO 9001
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-600 text-sm">
           Certified
          </p>
 
          <button
           onClick={()=>window.print()}
-          className="mt-3 bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold text-sm"
+          className="mt-3 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-semibold text-sm"
          >
           Print Certificate
          </button>

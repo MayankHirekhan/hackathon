@@ -31,116 +31,116 @@ export default function FarmersPage(){
 
  return(
 
- <div className="p-10 text-white bg-[#041f1a] min-h-screen">
+ <div className="space-y-6">
 
- <h1 className="text-3xl mb-8 font-bold">
- Farmers Management
- </h1>
+  <div>
+   <h1 className="text-3xl font-bold text-emerald-900">Farmers Management</h1>
+   <p className="text-sm text-emerald-700">Monitor farmer onboarding, compliance, and field activity.</p>
+  </div>
 
- <div className="bg-[#062f27] rounded-xl overflow-hidden shadow-lg">
+  <div className="bg-white rounded-2xl border border-emerald-100 shadow-sm overflow-hidden">
 
- <table className="w-full">
+  <table className="w-full text-sm">
 
- <thead className="bg-[#083d33]">
+  <thead className="bg-emerald-50 text-emerald-800">
 
- <tr>
+  <tr>
 
- <th className="p-4 text-left">Photo</th>
- <th className="p-4 text-left">Name</th>
- <th className="p-4 text-left">Email</th>
- <th className="p-4 text-left">Farm</th>
- <th className="p-4 text-left">Status</th>
- <th className="p-4 text-left">Actions</th>
+  <th className="p-4 text-left">Photo</th>
+  <th className="p-4 text-left">Name</th>
+  <th className="p-4 text-left">Email</th>
+  <th className="p-4 text-left">Farm</th>
+  <th className="p-4 text-left">Status</th>
+  <th className="p-4 text-left">Actions</th>
 
- </tr>
+  </tr>
 
- </thead>
+  </thead>
 
- <tbody>
+  <tbody>
 
- {farmers.map((f)=>(
- <tr key={f._id} className="border-b border-green-900 hover:bg-[#073a31]">
+  {farmers.map((f)=>(
+  <tr key={f._id} className="border-b border-emerald-100 hover:bg-emerald-50/60">
 
- {/* PHOTO */}
+  {/* PHOTO */}
 
- <td className="p-4">
+  <td className="p-4">
 
- <img
- src={f.profilePhoto || "/uploads/default.png"}
- className="w-10 h-10 rounded-full border border-green-500"
- />
+  <img
+  src={f.profilePhoto || "/uploads/default.png"}
+  className="w-10 h-10 rounded-full border border-emerald-200"
+  />
 
- </td>
+  </td>
 
- {/* NAME */}
+  {/* NAME */}
 
- <td className="p-4 font-semibold">
- {f.name}
- </td>
+  <td className="p-4 font-semibold text-emerald-900">
+  {f.name}
+  </td>
 
- {/* EMAIL */}
+  {/* EMAIL */}
 
- <td className="p-4 text-gray-300">
- {f.email}
- </td>
+  <td className="p-4 text-emerald-700">
+  {f.email}
+  </td>
 
- {/* FARM */}
+  {/* FARM */}
 
- <td className="p-4">
- {f.farmName || "Not Provided"}
- </td>
+  <td className="p-4">
+  {f.farmName || "Not Provided"}
+  </td>
 
- {/* STATUS */}
+  {/* STATUS */}
 
- <td className="p-4">
+  <td className="p-4">
 
- {f.banned ?
+  {f.banned ?
 
- <span className="bg-red-600 px-3 py-1 rounded text-sm">
- Banned
- </span>
+  <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">
+  Banned
+  </span>
 
- :
+  :
 
- <span className="bg-green-600 px-3 py-1 rounded text-sm">
- Active
- </span>
+  <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-semibold">
+  Active
+  </span>
 
- }
+  }
 
- </td>
+  </td>
 
- {/* ACTIONS */}
+  {/* ACTIONS */}
 
- <td className="p-4 flex gap-3">
+  <td className="p-4 flex flex-wrap gap-2">
 
- <Link
- href={`/dashboard/admin/farmers/${f._id}`}
- className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm"
- >
- View Details
- </Link>
+  <Link
+  href={`/dashboard/admin/farmers/${f._id}`}
+  className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded-lg text-xs font-semibold"
+  >
+  View Details
+  </Link>
 
- <button
- onClick={()=>banFarmer(f._id)}
- className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm"
- >
- {f.banned ? "Unban" : "Ban"}
- </button>
+  <button
+  onClick={()=>banFarmer(f._id)}
+  className="bg-white border border-red-200 text-red-700 hover:bg-red-50 px-3 py-1 rounded-lg text-xs font-semibold"
+  >
+  {f.banned ? "Unban" : "Ban"}
+  </button>
 
- </td>
+  </td>
 
- </tr>
- ))}
+  </tr>
+  ))}
 
- </tbody>
+  </tbody>
 
- </table>
+  </table>
 
- </div>
+  </div>
 
- </div>
+  </div>
 
- )
-
+  )
 }

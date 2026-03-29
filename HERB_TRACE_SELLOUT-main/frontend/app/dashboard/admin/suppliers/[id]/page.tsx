@@ -35,33 +35,33 @@ export default function SupplierDetails(){
 
  return(
 
- <div className="p-10 bg-[#041f1a] min-h-screen text-white">
+ <div className="space-y-10">
 
- <h1 className="text-3xl mb-8">
- Supplier Details
- </h1>
-
+ <div>
+  <h1 className="text-3xl font-bold text-emerald-900">Supplier Details</h1>
+  <p className="text-sm text-emerald-700">Performance, batches handled, and certification status.</p>
+ </div>
 
  {/* PROFILE */}
 
- <div className="bg-[#062f27] p-6 rounded-lg flex gap-6 items-center">
+ <div className="bg-white p-6 rounded-2xl flex gap-6 items-center border border-emerald-100 shadow-sm">
 
  <img
  src={supplier.profilePhoto}
- className="w-24 h-24 rounded-full border-4 border-green-500"
+ className="w-24 h-24 rounded-full border-2 border-emerald-200"
  />
 
  <div>
 
- <h2 className="text-2xl font-bold">
+ <h2 className="text-2xl font-semibold text-emerald-900">
  {supplier.name}
  </h2>
 
- <p>{supplier.email}</p>
+ <p className="text-emerald-700">{supplier.email}</p>
 
- <p>{supplier.companyName}</p>
+ <p className="text-emerald-800">{supplier.companyName}</p>
 
- <p className="text-gray-400">
+ <p className="text-emerald-600">
  {supplier.location}
  </p>
 
@@ -72,25 +72,25 @@ export default function SupplierDetails(){
 
  {/* STATS */}
 
- <div className="grid grid-cols-3 gap-6 mt-8">
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
- <div className="bg-[#062f27] p-6 rounded">
- Processed Herbs
- <h2 className="text-2xl">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-sm text-emerald-600">Processed Herbs</p>
+ <h2 className="text-2xl font-semibold text-emerald-900">
  {supplier.processedHerbs}
  </h2>
  </div>
 
- <div className="bg-[#062f27] p-6 rounded">
- Inventory
- <h2 className="text-2xl">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-sm text-emerald-600">Inventory</p>
+ <h2 className="text-2xl font-semibold text-emerald-900">
  {supplier.inventoryStock}
  </h2>
  </div>
 
- <div className="bg-[#062f27] p-6 rounded">
- Batches Received
- <h2 className="text-2xl">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-sm text-emerald-600">Batches Received</p>
+ <h2 className="text-2xl font-semibold text-emerald-900">
  {supplier.totalBatchesReceived}
  </h2>
  </div>
@@ -100,9 +100,9 @@ export default function SupplierDetails(){
 
  {/* PROCESSING CHART */}
 
- <div className="bg-[#062f27] p-6 rounded mt-10">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <h2 className="text-xl mb-4">
+ <h2 className="text-xl font-semibold text-emerald-900 mb-4">
  Herb Processing
  </h2>
 
@@ -116,7 +116,7 @@ export default function SupplierDetails(){
 
  <Tooltip/>
 
- <Bar dataKey="quantity" fill="#22c55e"/>
+ <Bar dataKey="quantity" fill="#16a34a"/>
 
  </BarChart>
 
@@ -127,17 +127,17 @@ export default function SupplierDetails(){
 
  {/* BATCH TABLE */}
 
- <div className="bg-[#062f27] p-6 rounded mt-10">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <h2 className="text-xl mb-4">
+ <h2 className="text-xl font-semibold text-emerald-900 mb-4">
  Batches Handled
  </h2>
 
- <table className="w-full">
+ <table className="w-full text-sm">
 
  <thead>
 
- <tr className="border-b border-green-700">
+ <tr className="border-b border-emerald-100 text-emerald-700 text-left">
 
  <th>Batch</th>
  <th>Herb</th>
@@ -151,7 +151,7 @@ export default function SupplierDetails(){
  <tbody>
 
  {batches.map((b:any)=>(
- <tr key={b._id} className="border-b border-green-900">
+ <tr key={b._id} className="border-b border-emerald-50">
 
  <td>{b.batchId}</td>
  <td>{b.herbName}</td>

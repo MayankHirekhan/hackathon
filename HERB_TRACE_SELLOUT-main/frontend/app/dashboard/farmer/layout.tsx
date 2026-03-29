@@ -11,13 +11,13 @@ export default function FarmerLayout({
  const router = useRouter()
  const pathname = usePathname()
 
-const menu = [
- {name:"Home",icon:"🏠",path:"/dashboard/farmer/home"},
- {name:"Create Batch",icon:"📦",path:"/dashboard/farmer/batches"},
- {name:"My Harvests",icon:"🌾",path:"/dashboard/farmer/harvests"},
- {name:"Reports",icon:"📊",path:"/dashboard/farmer/reports"},
- {name:"Farm Certificate",icon:"📜",path:"/dashboard/farmer/certificate"},
-]
+ const menu = [
+  {name:"Home",icon:"🏠",path:"/dashboard/farmer/home"},
+  {name:"Create Batch",icon:"📦",path:"/dashboard/farmer/batches"},
+  {name:"My Harvests",icon:"🌾",path:"/dashboard/farmer/harvests"},
+  {name:"Reports",icon:"📊",path:"/dashboard/farmer/reports"},
+  {name:"Farm Certificate",icon:"📜",path:"/dashboard/farmer/certificate"},
+ ]
 
  function logout(){
   router.push("/login")
@@ -25,15 +25,20 @@ const menu = [
 
  return(
 
- <div className="min-h-screen bg-[#041f17] text-white flex">
+ <div className="min-h-screen bg-emerald-50 text-emerald-950 flex">
 
   {/* SIDEBAR */}
 
-  <div className="w-64 bg-[#062c21] border-r border-[#134e3a] p-6">
+  <div className="w-72 bg-white border-r border-emerald-100 p-6 flex flex-col">
 
-   <h1 className="text-2xl font-bold mb-10 text-green-400">
-    🌿 HerbTrace
-   </h1>
+   <div className="mb-8">
+    <h1 className="text-2xl font-bold text-emerald-900">
+     🌾 HerbTracking
+    </h1>
+    <p className="text-xs uppercase tracking-[0.2em] text-emerald-600 mt-1">
+     Kisan Dashboard
+    </p>
+   </div>
 
    <div className="space-y-2">
 
@@ -46,8 +51,8 @@ const menu = [
      <button
       key={index}
       onClick={()=>router.push(item.path)}
-      className={`w-full flex items-center gap-3 p-3 rounded-lg transition
-      ${active ? "bg-[#0b3d2f] text-green-400" : "hover:bg-[#0b3d2f]"}`}
+      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl transition font-medium
+      ${active ? "bg-emerald-100 text-emerald-900" : "text-emerald-700 hover:bg-emerald-50"}`}
      >
 
       <span>{item.icon}</span>
@@ -61,6 +66,10 @@ const menu = [
 
    </div>
 
+   <div className="mt-auto pt-6 text-xs text-emerald-600">
+    Grow • Track • Earn Trust
+   </div>
+
   </div>
 
   {/* MAIN AREA */}
@@ -69,11 +78,11 @@ const menu = [
 
    {/* TOP BAR */}
 
-   <div className="flex justify-end items-center p-4 border-b border-[#134e3a]">
-
+   <div className="flex justify-between items-center p-4 border-b border-emerald-100 bg-white">
+    <p className="text-sm text-emerald-700">Namaste, farmer partner 👋</p>
     <button
      onClick={logout}
-     className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded"
+     className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-semibold"
     >
      Logout
     </button>

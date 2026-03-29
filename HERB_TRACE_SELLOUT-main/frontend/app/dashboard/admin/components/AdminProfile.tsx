@@ -16,24 +16,26 @@ export default function AdminProfile(){
 
  if(!admin) return null
 
- return(
+  return(
 
- <div className="bg-[#062f27] p-6 rounded-lg flex items-center gap-6">
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm flex items-center gap-6">
 
- <div className="w-20 h-20 rounded-full border-4 border-green-500"></div>
+  <div className="w-16 h-16 rounded-full border-2 border-emerald-300 bg-emerald-50 flex items-center justify-center text-emerald-700">
+   🛡️
+  </div>
 
- <div>
+  <div>
 
- <h2 className="text-xl font-bold">{admin.name}</h2>
+  <h2 className="text-xl font-semibold text-emerald-900">{admin.name}</h2>
 
- <p className="text-gray-300">{admin.email}</p>
+  <p className="text-emerald-700">{admin.email}</p>
 
- <p className="text-sm text-gray-400">System Administrator</p>
+  <p className="text-sm text-emerald-600">National Operations Desk</p>
 
- </div>
+  </div>
 
- </div>
+  </div>
 
- )
+  )
 
 }

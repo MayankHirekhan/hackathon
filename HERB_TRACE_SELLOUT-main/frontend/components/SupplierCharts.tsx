@@ -27,36 +27,36 @@ export default function SupplierCharts({data}:any){
 
  const values = data?.length ? data.map((d:any)=>d.quantity) : [0]
 
- const chartData={
-  labels,
-  datasets:[
-   {
-    label:"Herbs Processed (kg)",
-    data:values,
-    backgroundColor:"#22c55e"
-   }
-  ]
- }
+  const chartData={
+   labels,
+   datasets:[
+    {
+     label:"Herbs Processed (kg)",
+     data:values,
+     backgroundColor:"#16a34a"
+    }
+   ]
+  }
 
  const options={
   responsive:true,
   maintainAspectRatio:false
  }
 
- return(
+  return(
 
- <div className="bg-[#083d34] p-6 rounded-xl">
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-  <h2 className="text-green-400 mb-4">
-   Herb Processing
-  </h2>
+   <h2 className="text-emerald-900 font-semibold mb-4">
+    Herb Processing (kg)
+   </h2>
 
-  <div className="h-[300px]">
-   <Bar data={chartData} options={options}/>
+   <div className="h-[300px]">
+    <Bar data={chartData} options={options}/>
+   </div>
+
   </div>
 
- </div>
-
- )
+  )
 
 }

@@ -21,43 +21,43 @@ export default function EntitySelectChart(){
 
  },[type])
 
- return(
+  return(
 
- <div className="bg-[#062f27] p-6 rounded-lg">
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <div className="flex justify-between mb-4">
+  <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
 
- <h2 className="text-xl">Comparison Chart</h2>
+  <h2 className="text-xl font-semibold text-emerald-900">Comparison Chart</h2>
 
- <select
- value={type}
- onChange={(e)=>setType(e.target.value)}
- className="bg-[#041f1a] p-2 rounded"
- >
+  <select
+  value={type}
+  onChange={(e)=>setType(e.target.value)}
+  className="bg-white border border-emerald-200 px-3 py-2 rounded-lg text-emerald-900 shadow-sm"
+  >
 
- <option value="farmers">Farmers</option>
- <option value="suppliers">Suppliers</option>
+  <option value="farmers">Farmers</option>
+  <option value="suppliers">Suppliers</option>
 
- </select>
+  </select>
 
- </div>
+  </div>
 
- <ResponsiveContainer width="100%" height={300}>
+  <ResponsiveContainer width="100%" height={300}>
 
- <BarChart data={data}>
+  <BarChart data={data}>
 
- <XAxis dataKey="name"/>
- <YAxis/>
- <Tooltip/>
+  <XAxis dataKey="name"/>
+  <YAxis/>
+  <Tooltip/>
 
- <Bar dataKey="totalHarvests" fill="#22c55e"/>
+  <Bar dataKey="totalHarvests" fill="#22c55e"/>
 
- </BarChart>
+  </BarChart>
 
- </ResponsiveContainer>
+  </ResponsiveContainer>
 
- </div>
+  </div>
 
- )
+  )
 
 }

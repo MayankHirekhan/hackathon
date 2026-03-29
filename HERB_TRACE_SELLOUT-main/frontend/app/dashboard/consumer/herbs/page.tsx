@@ -20,27 +20,32 @@ fetch(`${API}/api/batches`)
 
 return(
 
-<div className="p-10 text-white">
+<div className="space-y-6">
 
-<h1 className="text-3xl text-green-400 mb-6">
-Available Herbs
-</h1>
+<div>
+ <h1 className="text-3xl font-bold text-emerald-900">
+  Available Herbs
+ </h1>
+ <p className="text-sm text-emerald-700">
+  Explore verified batches ready for purchase.
+ </p>
+</div>
 
-<div className="grid grid-cols-4 gap-6">
+<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
 {herbs.map(h=>(
 <div
 key={h._id}
-className="bg-[#083d34] p-5 rounded-xl"
+className="bg-white p-5 rounded-2xl border border-emerald-100 shadow-sm"
 >
 
-<p className="font-semibold">
+<p className="font-semibold text-emerald-900">
 {h.herbName}
 </p>
 
-<p>Farmer: {h.farmer}</p>
-<p>Location: {h.location}</p>
-<p>Rating: ⭐ {h.rating}</p>
+<p className="text-emerald-700 text-sm">Farmer: {h.farmer}</p>
+<p className="text-emerald-600 text-sm">Location: {h.location}</p>
+<p className="text-emerald-700 text-sm">Rating: ⭐ {h.rating}</p>
 
 </div>
 ))}

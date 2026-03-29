@@ -12,6 +12,9 @@ interface Batch{
  location:string
  hash:string
  previousHash:string
+ latitude?:number
+ longitude?:number
+ geoImage?:string
 }
 
 export default function Harvests(){
@@ -54,7 +57,6 @@ export default function Harvests(){
     throw new Error(`API request failed: ${res.status} - ${text}`)
    }
 
-   // Prevent HTML parse error
    if(text.startsWith("<!DOCTYPE")){
     throw new Error("Server returned HTML instead of JSON")
    }
@@ -79,117 +81,112 @@ export default function Harvests(){
  },[API])
 
 
- /* =========================
-    LOADING
- ========================= */
-
  if(loading){
   return(
-   <div className="text-white p-10">
+   <div className="text-emerald-700 p-10">
     Loading harvests...
    </div>
   )
  }
 
 
- /* =========================
-    ERROR
- ========================= */
-
  if(error){
   return(
-   <div className="text-red-400 p-10">
+   <div className="text-red-500 p-10">
     {error}
    </div>
   )
  }
 
 
- /* =========================
-    UI
- ========================= */
-
  return(
 
- <div>
+ <div className="space-y-6">
 
- <h1 className="text-3xl font-bold mb-8">
- My Harvests
- </h1>
+ <div>
+  <h1 className="text-3xl font-bold text-emerald-900">
+  My Harvests
+  </h1>
+  <p className="text-sm text-emerald-700">
+   View every batch recorded for your farm, ready for processing and traceability.
+  </p>
+ </div>
 
  {batches.length===0 &&(
-  <p className="text-gray-400">
+  <p className="text-emerald-600">
    No harvest batches found
   </p>
  )}
 
 
- <div className="grid grid-cols-2 gap-6">
+ <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
  {batches.map(batch=>(
 
  <div
  key={batch._id}
- className="bg-[#062c21] p-6 rounded-xl shadow-lg"
+ className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm"
  >
 
  <img
  src={`/herbs/${batch.herbName.toLowerCase()}.jpg`}
- className="h-40 w-full object-cover rounded"
+ className="h-40 w-full object-cover rounded-xl"
  />
 
- <h2 className="text-xl mt-3 font-semibold">
+ <h2 className="text-xl mt-4 font-semibold text-emerald-900">
  {batch.herbName}
  </h2>
 
- <p>Batch ID : {batch.batchId}</p>
- <p>Harvest : {batch.harvestDate}</p>
- <p>Quantity : {batch.quantity} kg</p>
- <p>Location : {batch.location}</p>
+ <div className="text-sm text-emerald-700 mt-2 space-y-1">
+  <p>Batch ID : {batch.batchId}</p>
+  <p>Harvest : {batch.harvestDate}</p>
+  <p>Quantity : {batch.quantity} kg</p>
+  <p>Location : {batch.location}</p>
+ </div>
 
  {(batch.latitude && batch.longitude) && (
-  <div className="mt-3 p-3 bg-[#041f17] rounded border border-green-600 text-sm">
-   <p className="text-green-400 font-semibold mb-2">📍 GPS Coordinates</p>
-   <p className="text-white">Lat: <b>{batch.latitude.toFixed(6)}</b></p>
-   <p className="text-white">Lon: <b>{batch.longitude.toFixed(6)}</b></p>
+  <div className="mt-4 p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-sm">
+   <p className="text-emerald-700 font-semibold mb-2">📍 GPS Coordinates</p>
+   <p className="text-emerald-900">Lat: <b>{batch.latitude.toFixed(6)}</b></p>
+   <p className="text-emerald-900">Lon: <b>{batch.longitude.toFixed(6)}</b></p>
   </div>
  )}
 
  {batch.geoImage && (
   <img
    src={batch.geoImage}
-   className="mt-3 rounded border border-green-600 w-full"
+   className="mt-3 rounded-xl border border-emerald-100 w-full"
    alt="Farm location map"
   />
  )}
 
- <div className="mt-4 bg-[#041f17] p-3 rounded text-xs">
+ <div className="mt-4 bg-emerald-50 p-3 rounded-xl text-xs border border-emerald-100">
 
- <p className="text-green-400">
+ <p className="text-emerald-700 font-semibold">
  Block Hash
  </p>
 
- <p className="break-all text-gray-300">
+ <p className="break-all text-emerald-900">
  {batch.hash}
  </p>
 
- <p className="text-yellow-400 mt-2">
+ <p className="text-emerald-600 mt-2">
  Previous Block
  </p>
 
- <p className="break-all text-gray-400">
+ <p className="break-all text-emerald-700">
  {batch.previousHash}
  </p>
 
  </div>
 
 
- <div className="mt-4 flex justify-center">
-
- <QRCodeCanvas
- value={`${FRONTEND_URL}/trace/${batch.batchId}`}
- size={120}
- />
+ <div className="mt-4 flex flex-col items-center gap-2">
+  <p className="text-xs text-emerald-600">Consumer QR Verification</p>
+  <QRCodeCanvas
+   value={`${FRONTEND_URL}/trace/${batch.batchId}`}
+   size={120}
+  />
 
  </div>
 
@@ -202,5 +199,5 @@ export default function Harvests(){
  </div>
 
  )
-
+ 
 }

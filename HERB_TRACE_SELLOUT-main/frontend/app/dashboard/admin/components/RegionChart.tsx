@@ -15,28 +15,28 @@ export default function RegionChart(){
 
  },[])
 
- return(
+  return(
 
- <div className="bg-[#062f27] p-6 rounded-lg">
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <h2 className="text-xl mb-4">Herb Production</h2>
+  <h2 className="text-xl font-semibold text-emerald-900 mb-4">Herb Production by Region</h2>
 
- <ResponsiveContainer width="100%" height={300}>
+  <ResponsiveContainer width="100%" height={300}>
 
- <BarChart data={data}>
+  <BarChart data={data}>
 
- <XAxis dataKey="herb"/>
- <YAxis/>
- <Tooltip/>
+  <XAxis dataKey="herb"/>
+  <YAxis/>
+  <Tooltip/>
 
- <Bar dataKey="quantity" fill="#22c55e"/>
+  <Bar dataKey="quantity" fill="#16a34a"/>
 
- </BarChart>
+  </BarChart>
 
- </ResponsiveContainer>
+  </ResponsiveContainer>
 
- </div>
+  </div>
 
- )
+  )
 
 }

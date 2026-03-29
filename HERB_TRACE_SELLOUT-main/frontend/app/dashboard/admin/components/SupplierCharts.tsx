@@ -15,31 +15,31 @@ export default function SupplierCharts(){
 
  },[])
 
- return(
+  return(
 
- <div className="mt-12">
+  <div className="mt-12 space-y-4">
 
- <h2 className="text-xl mb-4">Supplier Comparison</h2>
+  <h2 className="text-xl font-semibold text-emerald-900">Supplier Comparison</h2>
 
- <div className="bg-[#062f27] p-6 rounded">
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <ResponsiveContainer width="100%" height={300}>
+  <ResponsiveContainer width="100%" height={300}>
 
- <BarChart data={data}>
+  <BarChart data={data}>
 
- <XAxis dataKey="name"/>
- <YAxis/>
- <Tooltip/>
- <Bar dataKey="processed" fill="#22c55e"/>
+  <XAxis dataKey="name"/>
+  <YAxis/>
+  <Tooltip/>
+  <Bar dataKey="processed" fill="#16a34a"/>
 
- </BarChart>
+  </BarChart>
 
- </ResponsiveContainer>
+  </ResponsiveContainer>
 
- </div>
+  </div>
 
- </div>
+  </div>
 
- )
+  )
 
 }
