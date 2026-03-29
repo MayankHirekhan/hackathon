@@ -29,7 +29,7 @@ export default function FarmerCertificate(){
  if(!farmer){
 
  return(
- <div className="text-white p-10">
+ <div className="text-emerald-700 p-10">
  Loading certificate...
  </div>
  )
@@ -44,7 +44,7 @@ export default function FarmerCertificate(){
 
  return(
 
- <div className="bg-[#062c21] border-[6px] border-green-700 rounded-xl p-10 shadow-xl mt-10 relative">
+ <div className="bg-white border border-emerald-200 rounded-3xl p-10 shadow-sm mt-10 relative">
 
  {/* SEAL */}
 
@@ -56,27 +56,27 @@ export default function FarmerCertificate(){
 
  <div className="text-center mb-8">
 
- <h1 className="text-3xl font-bold text-green-400">
- HERBTRACE AUTHORITY
+ <h1 className="text-3xl font-bold text-emerald-900">
+ HerbTracking Authority
  </h1>
 
- <p className="text-gray-300 text-sm">
- Herbal Supply Chain Verification Board
+ <p className="text-emerald-700 text-sm">
+ Herbal Supply Chain Verification Board (India)
  </p>
 
  </div>
 
- <h2 className="text-center text-2xl font-semibold mb-10">
+ <h2 className="text-center text-2xl font-semibold mb-10 text-emerald-800">
  Farm Authenticity Certificate
  </h2>
 
  {/* TEXT */}
 
- <div className="text-center space-y-4 text-lg">
+ <div className="text-center space-y-4 text-lg text-emerald-900">
 
  <p>This certificate confirms that</p>
 
- <p className="text-3xl font-bold text-green-400">
+ <p className="text-3xl font-bold text-emerald-700">
  {farmer.name}
  </p>
 
@@ -94,35 +94,35 @@ export default function FarmerCertificate(){
 
  <p>
  is a verified herbal producer within the
- HerbTrace Blockchain Traceability Network.
+ HerbTracking India national traceability network.
  </p>
 
  </div>
 
  {/* DETAILS */}
 
- <div className="grid grid-cols-2 gap-6 mt-10 text-sm">
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 text-sm">
 
  <div>
- <p className="text-gray-400">Certificate ID</p>
- <p className="font-semibold">{certificateId}</p>
+ <p className="text-emerald-600">Certificate ID</p>
+ <p className="font-semibold text-emerald-900">{certificateId}</p>
  </div>
 
  <div>
- <p className="text-gray-400">Issue Date</p>
- <p className="font-semibold">{issueDate}</p>
+ <p className="text-emerald-600">Issue Date</p>
+ <p className="font-semibold text-emerald-900">{issueDate}</p>
  </div>
 
  <div>
- <p className="text-gray-400">Experience</p>
- <p className="font-semibold">
+ <p className="text-emerald-600">Experience</p>
+ <p className="font-semibold text-emerald-900">
  {farmer.experience} years
  </p>
  </div>
 
  <div>
- <p className="text-gray-400">Farmer Rating</p>
- <p className="font-semibold">
+ <p className="text-emerald-600">Farmer Rating</p>
+ <p className="font-semibold text-emerald-900">
  ⭐ {farmer.rating}/5
  </p>
  </div>
@@ -131,23 +131,23 @@ export default function FarmerCertificate(){
 
  {/* FOOTER */}
 
- <div className="flex justify-between items-end mt-12">
+ <div className="flex flex-col md:flex-row justify-between items-start md:items-end mt-12 gap-8">
 
  {/* SIGNATURE */}
 
  <div>
 
- <p className="text-gray-400 text-sm">
+ <p className="text-emerald-600 text-sm">
  Authorized By
  </p>
 
- <p className="text-xl font-semibold mt-1">
- HerbTrace Authority
+ <p className="text-xl font-semibold mt-1 text-emerald-900">
+ HerbTracking Authority
  </p>
 
- <div className="mt-2 border-t border-green-700 w-40"></div>
+ <div className="mt-2 border-t border-emerald-300 w-40"></div>
 
- <p className="text-xs mt-1">
+ <p className="text-xs mt-1 text-emerald-600">
  Digital Verification Signature
  </p>
 
@@ -157,11 +157,11 @@ export default function FarmerCertificate(){
 
  <div className="text-center">
 
- <div className="w-24 h-24 rounded-full border-4 border-red-600 flex items-center justify-center text-red-500 text-xs font-bold rotate-12">
+ <div className="w-24 h-24 rounded-full border-2 border-emerald-600 flex items-center justify-center text-emerald-700 text-xs font-bold rotate-3 bg-emerald-50">
  VERIFIED
  </div>
 
- <p className="text-xs text-gray-400 mt-2">
+ <p className="text-xs text-emerald-600 mt-2">
  Official Seal
  </p>
 
@@ -171,7 +171,7 @@ export default function FarmerCertificate(){
 
  <div className="text-center">
 
- <p className="text-gray-400 text-sm mb-2">
+ <p className="text-emerald-600 text-sm mb-2">
  Verification QR
  </p>
 

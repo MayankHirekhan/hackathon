@@ -33,8 +33,6 @@ const data = await res.json()
 
 setConsumer(data)
 
-/* LOAD HISTORY */
-
 const historyRes =
 await fetch(`${API}/api/consumer/${id}/history`)
 
@@ -51,12 +49,12 @@ loadData()
 },[])
 
 if(loading){
-return <div className="p-10 text-white">Loading...</div>
+return <div className="p-10 text-emerald-700">Loading...</div>
 }
 
 if(!consumer){
 return(
-<div className="p-10 text-red-400">
+<div className="p-10 text-red-500">
 Consumer not logged in
 </div>
 )
@@ -64,31 +62,34 @@ Consumer not logged in
 
 return(
 
-<div className="p-10 text-white space-y-8">
+<div className="space-y-8">
 
-<h1 className="text-3xl text-green-400">
-Consumer Dashboard
-</h1>
+<div>
+ <h1 className="text-3xl font-bold text-emerald-900">
+  Consumer Dashboard
+ </h1>
+ <p className="text-sm text-emerald-700">
+  Track verified herbs and build trust in every purchase.
+ </p>
+</div>
 
-{/* PROFILE CARD */}
-
-<div className="bg-[#062c21] p-6 rounded-xl flex gap-6 items-center">
+<div className="bg-white p-6 rounded-2xl flex flex-wrap gap-6 items-center border border-emerald-100 shadow-sm">
 
 <img
 src="/uploads/consumer-avatar.png"
-className="w-20 h-20 rounded-full border-4 border-green-400"
+className="w-20 h-20 rounded-full border-2 border-emerald-200"
 />
 
 <div>
 
-<h2 className="text-xl font-semibold">
+<h2 className="text-xl font-semibold text-emerald-900">
 {consumer.name}
 </h2>
 
-<p className="text-gray-300">{consumer.email}</p>
-<p className="text-gray-400">{consumer.location}</p>
+<p className="text-emerald-700">{consumer.email}</p>
+<p className="text-emerald-600">{consumer.location}</p>
 
-<div className="flex gap-6 mt-3 text-sm">
+<div className="flex flex-wrap gap-6 mt-3 text-sm text-emerald-700">
 
 <p>Member ID: {consumer._id.slice(-6)}</p>
 <p>Trust Score: ⭐ 4.8</p>
@@ -100,71 +101,68 @@ className="w-20 h-20 rounded-full border-4 border-green-400"
 
 </div>
 
-{/* QUICK ACTIONS */}
-
-<div className="grid grid-cols-3 gap-6">
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
 <button
 onClick={()=>router.push("/dashboard/consumer/trace")}
-className="bg-[#083d34] p-6 rounded-xl hover:bg-[#0b4f43]"
+className="bg-white border border-emerald-100 p-6 rounded-2xl hover:bg-emerald-50 text-left shadow-sm"
 >
-🔍 Scan / Verify Product
+<p className="text-lg font-semibold text-emerald-900">🔍 Scan / Verify Product</p>
+<p className="text-sm text-emerald-600 mt-2">Check authenticity instantly.</p>
 </button>
 
 <button
 onClick={()=>router.push("/dashboard/consumer/herbs")}
-className="bg-[#083d34] p-6 rounded-xl hover:bg-[#0b4f43]"
+className="bg-white border border-emerald-100 p-6 rounded-2xl hover:bg-emerald-50 text-left shadow-sm"
 >
-🌿 Browse Herbs
+<p className="text-lg font-semibold text-emerald-900">🌿 Browse Herbs</p>
+<p className="text-sm text-emerald-600 mt-2">Explore certified herbs.</p>
 </button>
 
 <button
 onClick={()=>router.push("/dashboard/consumer/feedback")}
-className="bg-[#083d34] p-6 rounded-xl hover:bg-[#0b4f43]"
+className="bg-white border border-emerald-100 p-6 rounded-2xl hover:bg-emerald-50 text-left shadow-sm"
 >
-💬 Submit Feedback
+<p className="text-lg font-semibold text-emerald-900">💬 Submit Feedback</p>
+<p className="text-sm text-emerald-600 mt-2">Share your experience.</p>
 </button>
 
 </div>
 
-{/* BLOCKCHAIN STATS */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-<div className="grid grid-cols-3 gap-6">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<div className="bg-[#062c21] p-6 rounded">
-
-<p className="text-gray-400">Verified Products</p>
-<h2 className="text-2xl">{history.length}</h2>
+<p className="text-emerald-600">Verified Products</p>
+<h2 className="text-2xl font-semibold text-emerald-900">{history.length}</h2>
 
 </div>
 
-<div className="bg-[#062c21] p-6 rounded">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<p className="text-gray-400">Trusted Farmers</p>
-<h2 className="text-2xl">12</h2>
-
-</div>
-
-<div className="bg-[#062c21] p-6 rounded">
-
-<p className="text-gray-400">Fraud Alerts</p>
-<h2 className="text-2xl text-red-400">0</h2>
+<p className="text-emerald-600">Trusted Farmers</p>
+<h2 className="text-2xl font-semibold text-emerald-900">12</h2>
 
 </div>
 
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+
+<p className="text-emerald-600">Fraud Alerts</p>
+<h2 className="text-2xl font-semibold text-emerald-900">0</h2>
+
 </div>
 
-{/* TRACE HISTORY */}
+</div>
 
-<div className="bg-[#062c21] p-6 rounded-xl">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<h2 className="text-xl mb-4">
+<h2 className="text-xl font-semibold text-emerald-900 mb-4">
 Purchase / Verification History
 </h2>
 
 {history.length===0 &&(
 
-<p className="text-gray-400">
+<p className="text-emerald-600">
 No products verified yet
 </p>
 
@@ -174,13 +172,13 @@ No products verified yet
 
 <thead>
 
-<tr className="border-b border-green-700">
+<tr className="border-b border-emerald-100 text-emerald-700 text-left">
 
-<th className="p-2 text-left">Herb</th>
-<th className="p-2 text-left">Batch</th>
-<th className="p-2 text-left">Farmer</th>
-<th className="p-2 text-left">Supplier</th>
-<th className="p-2 text-left">Verified On</th>
+<th className="p-2">Herb</th>
+<th className="p-2">Batch</th>
+<th className="p-2">Farmer</th>
+<th className="p-2">Supplier</th>
+<th className="p-2">Verified On</th>
 
 </tr>
 
@@ -189,7 +187,7 @@ No products verified yet
 <tbody>
 
 {history.map((item:any)=>(
-<tr key={item._id} className="border-b border-green-900">
+<tr key={item._id} className="border-b border-emerald-50">
 
 <td className="p-2">{item.herbName}</td>
 <td className="p-2">{item.batchId}</td>

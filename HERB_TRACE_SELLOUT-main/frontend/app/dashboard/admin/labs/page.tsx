@@ -16,15 +16,20 @@ export default function LabsPage(){
 
  return(
 
- <div className="p-10 text-white">
+ <div className="space-y-6">
 
- <h1 className="text-3xl mb-6">Lab Testers</h1>
+ <div>
+  <h1 className="text-3xl font-bold text-emerald-900">Lab Testers</h1>
+  <p className="text-sm text-emerald-700">Accredited labs verifying purity and compliance.</p>
+ </div>
 
- <table className="w-full bg-[#062f27] rounded-lg">
+ <div className="bg-white border border-emerald-100 rounded-2xl shadow-sm overflow-hidden">
+
+ <table className="w-full text-sm">
 
  <thead>
 
- <tr className="border-b border-green-900">
+ <tr className="border-b border-emerald-100 bg-emerald-50 text-emerald-800 text-left">
 
  <th className="p-3">Lab Name</th>
  <th className="p-3">Certificate</th>
@@ -37,7 +42,7 @@ export default function LabsPage(){
  <tbody>
 
  {labs.map((l)=>(
- <tr key={l._id} className="border-b border-green-900">
+ <tr key={l._id} className="border-b border-emerald-100">
 
  <td className="p-3">{l.labName}</td>
  <td className="p-3">{l.certificateNumber}</td>
@@ -49,6 +54,8 @@ export default function LabsPage(){
  </tbody>
 
  </table>
+
+ </div>
 
  </div>
 

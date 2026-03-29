@@ -58,7 +58,7 @@ fetch(`${API}/api/farmer/${id}`)
 },[])
 
 if(!farmer){
- return <div className="text-white p-10">Loading...</div>
+ return <div className="text-emerald-700 p-10">Loading...</div>
 }
 
 const herbs = herbStats?.herbs || {}
@@ -69,7 +69,7 @@ const herbChart={
   {
    label:"Production (kg)",
    data:Object.values(herbs),
-   backgroundColor:"#22c55e"
+   backgroundColor:"#16a34a"
   }
  ]
 }
@@ -80,33 +80,33 @@ const regionChart={
   {
    label:"Regional Production",
    data:Object.values(regionStats),
-   backgroundColor:"#4ade80"
+   backgroundColor:"#22c55e"
   }
  ]
 }
 
 return(
 
-<div className="space-y-8 text-white">
+<div className="space-y-8">
 
 {/* PROFILE */}
 
-<div className="bg-[#062c21] p-6 rounded-xl flex gap-6">
+<div className="bg-white p-6 rounded-2xl flex gap-6 border border-emerald-100 shadow-sm">
 
 <img
 src={farmer.profilePhoto || "/default.png"}
-className="w-24 h-24 rounded-full border-4 border-green-500"
+className="w-24 h-24 rounded-full border-2 border-emerald-200"
 />
 
 <div>
 
-<h2 className="text-2xl font-bold">{farmer.name}</h2>
+<h2 className="text-2xl font-semibold text-emerald-900">{farmer.name}</h2>
 
-<div className="text-yellow-400">
+<div className="text-emerald-600 text-sm mt-1">
 
 {"⭐".repeat(Math.round(farmer.rating || 0))}
 
-<span className="ml-2 text-gray-300">
+<span className="ml-2 text-emerald-700">
 ({farmer.rating}/5)
 </span>
 
@@ -119,22 +119,26 @@ className="w-24 h-24 rounded-full border-4 border-green-500"
 
 {/* FARM INFO */}
 
-<div className="grid grid-cols-4 gap-6">
+<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-<div className="bg-[#062c21] p-4 rounded">
-Farm: {farmer.farmName}
+<div className="bg-white p-4 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-xs text-emerald-600">Farm</p>
+ <p className="text-emerald-900 font-semibold mt-2">{farmer.farmName}</p>
 </div>
 
-<div className="bg-[#062c21] p-4 rounded">
-Location: {farmer.location}
+<div className="bg-white p-4 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-xs text-emerald-600">Location</p>
+ <p className="text-emerald-900 font-semibold mt-2">{farmer.location}</p>
 </div>
 
-<div className="bg-[#062c21] p-4 rounded">
-Experience: {farmer.experience} yrs
+<div className="bg-white p-4 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-xs text-emerald-600">Experience</p>
+ <p className="text-emerald-900 font-semibold mt-2">{farmer.experience} yrs</p>
 </div>
 
-<div className="bg-[#062c21] p-4 rounded">
-Total Harvests: {herbStats?.totalHarvests || 0}
+<div className="bg-white p-4 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-xs text-emerald-600">Total Harvests</p>
+ <p className="text-emerald-900 font-semibold mt-2">{herbStats?.totalHarvests || 0}</p>
 </div>
 
 </div>
@@ -142,11 +146,11 @@ Total Harvests: {herbStats?.totalHarvests || 0}
 
 {/* CHARTS */}
 
-<div className="grid grid-cols-2 gap-6">
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-<div className="bg-[#062c21] p-6 rounded">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<h3>Herb Cultivation</h3>
+<h3 className="font-semibold text-emerald-900 mb-3">Herb Cultivation</h3>
 
 <div className="h-[250px]">
 <Bar data={herbChart}/>
@@ -154,9 +158,9 @@ Total Harvests: {herbStats?.totalHarvests || 0}
 
 </div>
 
-<div className="bg-[#062c21] p-6 rounded">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<h3>Regional Farmer Comparison</h3>
+<h3 className="font-semibold text-emerald-900 mb-3">Regional Farmer Comparison</h3>
 
 <div className="h-[250px]">
 <Bar data={regionChart}/>
@@ -169,24 +173,24 @@ Total Harvests: {herbStats?.totalHarvests || 0}
 
 {/* REVIEWS */}
 
-<div className="bg-[#062c21] p-6 rounded-xl">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<h3 className="text-xl mb-4">Farmer Reviews</h3>
+<h3 className="text-xl font-semibold text-emerald-900 mb-4">Farmer Reviews</h3>
 
 {farmer.reviews?.length === 0 && (
-<p className="text-gray-400">No reviews yet</p>
+<p className="text-emerald-600">No reviews yet</p>
 )}
 
 {farmer.reviews?.map((r:any,i:number)=>(
-<div key={i} className="border-b border-green-800 pb-3 mb-3">
+<div key={i} className="border-b border-emerald-100 pb-3 mb-3">
 
-<p className="text-green-400">{r.user}</p>
+<p className="text-emerald-900 font-semibold">{r.user}</p>
 
-<p className="text-yellow-400">
+<p className="text-emerald-600">
 {"⭐".repeat(r.rating)}
 </p>
 
-<p className="text-gray-300">{r.comment}</p>
+<p className="text-emerald-700">{r.comment}</p>
 
 </div>
 ))}

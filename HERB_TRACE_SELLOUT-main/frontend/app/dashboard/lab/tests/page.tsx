@@ -14,6 +14,10 @@ interface Batch {
  processingMethod: string
  dryingTemperature: number
  processingDuration: string
+ location?: string
+ latitude?: number
+ longitude?: number
+ geoImage?: string
 }
 
 export default function TestBatches(){
@@ -37,21 +41,14 @@ export default function TestBatches(){
 
   fetch(`${API}/api/lab/testable-batches`)
   .then(res=>{
-   console.log("API response status:", res.status)
    return res.json()
   })
   .then(data=>{
 
-   console.log("🧪 Lab API response:", data)
-
    if(data.success && Array.isArray(data.batches)){
-    console.log(`✅ Got ${data.batches.length} testable batches`)
     setBatches(data.batches)
    }else if(Array.isArray(data)){
-    console.log(`✅ Got ${data.length} testable batches (legacy format)`)
     setBatches(data)
-   }else{
-    console.log("⚠️ No batches in response")
    }
 
    setLoading(false)
@@ -60,12 +57,6 @@ export default function TestBatches(){
   .catch(err=>{
    console.error("❌ Error fetching batches:", err)
    setLoading(false)
-  })
-  .catch(err=>{
-
-   console.error("❌ Error fetching batches:", err)
-   setLoading(false)
-
   })
 
  }, [API])
@@ -78,14 +69,6 @@ export default function TestBatches(){
    alert("Please select a test result")
    return
   }
-
-  // Debug: Check all required fields
-  console.log("📤 Submitting test results:")
-  console.log("  batchId:", batchId)
-  console.log("  labId:", labId)
-  console.log("  labName:", labName)
-  console.log("  labResult:", result.testResult)
-  console.log("  testDetails:", result.notes)
 
   if(!labId){
    alert("⚠️ Lab ID not found. Please log in again.")
@@ -104,8 +87,6 @@ export default function TestBatches(){
     testDetails: result.notes || ""
    }
 
-   console.log("📨 Sending payload:", payload)
-
    const res = await fetch(`${API}/api/lab/test-batch`,{
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -114,15 +95,11 @@ export default function TestBatches(){
 
    const data = await res.json()
 
-   console.log("📥 Response:", data)
-
    if(data.success){
     alert(`✅ Test results recorded: ${result.testResult}`)
     
-    /* REMOVE FROM TESTABLE BATCHES */
     setBatches(batches.filter(b=> b.batchId !== batchId))
     
-    /* CLEAR TEST RESULT */
     setTestResults({...testResults, [batchId]: null})
    }else{
     alert(`❌ ${data.message}`)
@@ -148,32 +125,37 @@ export default function TestBatches(){
  }
 
  if(loading){
-  return <p className="text-white p-10">🧪 Loading batches for testing...</p>
+  return <p className="text-emerald-700 p-10">🧪 Loading batches for testing...</p>
  }
 
  return(
 
-  <div className="space-y-8 p-8">
+  <div className="space-y-8">
 
-   <h1 className="text-3xl font-bold text-green-400">
-    🧪 Test Batches
-   </h1>
+   <div>
+    <h1 className="text-3xl font-bold text-emerald-900">
+     🧪 Test Batches
+    </h1>
+    <p className="text-sm text-emerald-700">
+     Record lab results and approve batches for packaging.
+    </p>
+   </div>
 
    {batches.length === 0 ? (
 
-    <div className="bg-[#083d34] p-6 rounded-xl space-y-4">
+    <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 space-y-4">
 
-     <p className="text-gray-300 font-bold">
+     <p className="text-emerald-700 font-semibold">
       ℹ️ All batches have been tested! ✅
      </p>
 
-     <div className="bg-[#041f17] p-4 rounded border border-green-600">
+     <div className="bg-white p-4 rounded-xl border border-emerald-100">
 
-      <p className="text-green-300 text-sm font-semibold mb-2">
+      <p className="text-emerald-700 text-sm font-semibold mb-2">
        Next steps:
       </p>
 
-      <ol className="text-gray-300 text-sm space-y-1 list-decimal list-inside">
+      <ol className="text-emerald-700 text-sm space-y-1 list-decimal list-inside">
 
        <li>Supplier receives test results</li>
        <li>Supplier packages tested herbs</li>
@@ -193,70 +175,70 @@ export default function TestBatches(){
 
       <div
        key={batch.batchId}
-       className="bg-[#083d34] p-6 rounded-xl border border-green-600"
+       className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm"
       >
 
-       <div className="grid grid-cols-2 gap-4 mb-4">
+       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
 
         <div>
 
-         <h3 className="text-2xl font-bold text-green-400">
+         <h3 className="text-2xl font-semibold text-emerald-900">
           {batch.herbName}
          </h3>
 
-         <p className="text-gray-300 font-semibold">
+         <p className="text-emerald-700 font-semibold">
           Batch: {batch.batchId}
          </p>
 
-         <p className="text-gray-400 text-sm mt-2">
+         <p className="text-emerald-600 text-sm mt-2">
           👨‍🌾 Farmer: {batch.farmer}
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-600 text-sm">
           📅 Harvest: {batch.harvestDate}
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-600 text-sm">
           ⚖️ Quantity: {batch.quantity} kg
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-600 text-sm">
           📍 Location: {batch.location}
          </p>
 
          {(batch.latitude && batch.longitude) && (
-          <div className="mt-3 p-3 bg-[#062f27] rounded border border-green-600 text-sm">
-           <p className="text-green-400 font-semibold mb-1">🗺️ GPS Coordinates</p>
-           <p className="text-white">Lat: <b>{batch.latitude.toFixed(6)}</b></p>
-           <p className="text-white">Lon: <b>{batch.longitude.toFixed(6)}</b></p>
+          <div className="mt-3 p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-sm">
+           <p className="text-emerald-700 font-semibold mb-1">🗺️ GPS Coordinates</p>
+           <p className="text-emerald-900">Lat: <b>{batch.latitude.toFixed(6)}</b></p>
+           <p className="text-emerald-900">Lon: <b>{batch.longitude.toFixed(6)}</b></p>
           </div>
          )}
 
          {batch.geoImage && (
           <img
            src={batch.geoImage}
-           className="mt-3 rounded border border-green-600 w-full"
+           className="mt-3 rounded-xl border border-emerald-100 w-full"
            alt="Farm location map"
           />
          )}
 
         </div>
 
-        <div className="bg-[#041f17] p-3 rounded">
+        <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
 
-         <p className="text-yellow-300 font-semibold text-sm mb-2">
+         <p className="text-emerald-700 font-semibold text-sm mb-2">
           ⚙️ Processing Details:
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-700 text-sm">
           Method: {batch.processingMethod}
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-700 text-sm">
           Temp: {batch.dryingTemperature}°C
          </p>
 
-         <p className="text-gray-400 text-sm">
+         <p className="text-emerald-700 text-sm">
           Duration: {batch.processingDuration}
          </p>
 
@@ -264,116 +246,37 @@ export default function TestBatches(){
 
        </div>
 
-       {/* TEST INPUT FORM */}
-
-       {!testResults[batch.batchId]?.submitted ? (
-
-        <div className="bg-[#041f17] p-4 rounded mt-4 space-y-3">
-
-         <p className="text-white font-semibold">🧪 Test Results:</p>
-
-         <div>
-
-          <label className="text-gray-300 text-sm">pH Level</label>
-
-          <input
-           type="number"
-           placeholder="6.5"
-           step="0.1"
-           value={testResults[batch.batchId]?.phLevel || ""}
-           onChange={(e)=>updateTestResult(batch.batchId, "phLevel", e.target.value)}
-           className="w-full bg-[#062f27] border border-green-500 rounded p-2 text-white"
-          />
-
-         </div>
-
-         <div>
-
-          <label className="text-gray-300 text-sm">Moisture Content (%)</label>
-
-          <input
-           type="number"
-           placeholder="12"
-           step="0.1"
-           value={testResults[batch.batchId]?.moisture || ""}
-           onChange={(e)=>updateTestResult(batch.batchId, "moisture", e.target.value)}
-           className="w-full bg-[#062f27] border border-green-500 rounded p-2 text-white"
-          />
-
-         </div>
-
-         <div>
-
-          <label className="text-gray-300 text-sm">Microbial Load (CFU/mL)</label>
-
-          <input
-           type="text"
-           placeholder="< 100"
-           value={testResults[batch.batchId]?.microbial || ""}
-           onChange={(e)=>updateTestResult(batch.batchId, "microbial", e.target.value)}
-           className="w-full bg-[#062f27] border border-green-500 rounded p-2 text-white"
-          />
-
-         </div>
-
-         <div>
-
-          <label className="text-gray-300 text-sm">Overall Result</label>
-
-          <select
-           value={testResults[batch.batchId]?.testResult || ""}
-           onChange={(e)=>updateTestResult(batch.batchId, "testResult", e.target.value)}
-           className="w-full bg-[#062f27] border border-green-500 rounded p-2 text-white"
-          >
-
-           <option value="">-- Select Result --</option>
-
-           <option value="PASS">✅ PASS</option>
-
-           <option value="FAIL">❌ FAIL</option>
-
-          </select>
-
-         </div>
-
-         <div>
-
-          <label className="text-gray-300 text-sm">Notes</label>
-
-          <textarea
-           placeholder="Any additional observations..."
-           value={testResults[batch.batchId]?.notes || ""}
-           onChange={(e)=>updateTestResult(batch.batchId, "notes", e.target.value)}
-           className="w-full bg-[#062f27] border border-green-500 rounded p-2 text-white h-16"
-          />
-
-         </div>
-
-         <button
-          onClick={()=>handleTestSubmit(batch.batchId)}
-          disabled={submitting}
-          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 px-4 py-2 rounded font-semibold text-white"
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+         <label className="text-xs font-semibold text-emerald-700">Test Result</label>
+         <select
+          value={testResults[batch.batchId]?.testResult || ""}
+          onChange={(e)=>updateTestResult(batch.batchId,"testResult",e.target.value)}
+          className="mt-2 w-full border border-emerald-200 rounded-xl px-3 py-2 text-emerald-900"
          >
-
-          {submitting ? "⏳ Submitting..." : "✅ Submit Test Results"}
-
-         </button>
-
+          <option value="">Select Result</option>
+          <option value="PASS">PASS</option>
+          <option value="FAIL">FAIL</option>
+         </select>
         </div>
-
-       ) : (
-
-        <div className="bg-[#0b3d2f] border border-green-500 p-4 rounded mt-4 text-center">
-
-         <p className="text-green-400 font-bold text-lg">✅ Test Submitted</p>
-
-         <p className="text-gray-300 text-sm mt-1">
-          Result: {testResults[batch.batchId]?.testResult}
-         </p>
-
+        <div>
+         <label className="text-xs font-semibold text-emerald-700">Notes</label>
+         <input
+          value={testResults[batch.batchId]?.notes || ""}
+          onChange={(e)=>updateTestResult(batch.batchId,"notes",e.target.value)}
+          placeholder="Observations / contaminants"
+          className="mt-2 w-full border border-emerald-200 rounded-xl px-3 py-2 text-emerald-900"
+         />
         </div>
+       </div>
 
-       )}
+       <button
+        onClick={()=>handleTestSubmit(batch.batchId)}
+        disabled={submitting}
+        className="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl font-semibold"
+       >
+        {submitting ? "Submitting..." : "Submit Test Result"}
+       </button>
 
       </div>
 

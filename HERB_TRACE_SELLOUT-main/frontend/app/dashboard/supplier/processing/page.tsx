@@ -20,13 +20,10 @@ export default function ProcessingPage(){
  const [submitting, setSubmitting] = useState(false)
  const [message, setMessage] = useState("")
 
- /* PROCESSING FORM */
  const [processingMethod, setProcessingMethod] = useState("air-dried")
  const [dryingTemperature, setDryingTemperature] = useState("")
  const [processingDuration, setProcessingDuration] = useState("")
  const [packetQuantity, setPacketQuantity] = useState("")
-
- /* FETCH RECEIVED BATCHES */
 
  useEffect(()=>{
 
@@ -35,10 +32,8 @@ export default function ProcessingPage(){
   .then(data => {
 
    if(Array.isArray(data)){
-    /* Filter: Only RECEIVED batches ready for processing */
     const receivedBatches = data.filter((b:any) => b.status === "received")
     setBatches(receivedBatches)
-    console.log(`Found ${receivedBatches.length} batches ready for processing`)
    }
 
    setLoading(false)
@@ -52,8 +47,6 @@ export default function ProcessingPage(){
   })
 
  }, [API])
-
- /* SUBMIT PROCESSING */
 
  async function handleProcessing(){
 
@@ -70,8 +63,6 @@ export default function ProcessingPage(){
   setSubmitting(true)
 
   try{
-
-   /* Step 1: Update batch with processing details */
 
    const batchRes = await fetch(`${API}/api/batches/${selectedBatch.batchId}/process`, {
     method: "PUT",
@@ -99,8 +90,6 @@ export default function ProcessingPage(){
     return
    }
 
-   /* Step 2: Create packets from the batch */
-
    const packetRes = await fetch(`${API}/api/packets/create`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -127,14 +116,12 @@ export default function ProcessingPage(){
    }else{
     setMessage(`✅ Batch processed! Created ${packetQuantity} packets`)
     
-    /* Clear form and refresh */
     setSelectedBatch(null)
     setProcessingMethod("air-dried")
     setDryingTemperature("")
     setProcessingDuration("")
     setPacketQuantity("")
     
-    /* Refresh batch list */
     setBatches(batches.filter(b => b.batchId !== selectedBatch.batchId))
    }
 
@@ -152,213 +139,145 @@ export default function ProcessingPage(){
  }
 
  if(loading){
-  return <p className="text-white p-10">⏳ Loading batches...</p>
+  return <p className="text-emerald-700 p-10">⏳ Loading batches...</p>
  }
 
  return(
 
-  <div className="p-10 text-white space-y-6">
+  <div className="space-y-6">
 
-   <h1 className="text-3xl font-bold text-green-400">
-    ⚙️ Process Batch
-   </h1>
+   <div>
+    <h1 className="text-3xl font-bold text-emerald-900">
+     ⚙️ Process Batch
+    </h1>
+    <p className="text-sm text-emerald-700">
+     Move received batches through drying, processing, and packet creation.
+    </p>
+   </div>
 
-   {/* SELECT BATCH */}
-
-   <div className="bg-[#083d34] p-6 rounded-xl">
-
-    <h2 className="text-xl font-bold text-green-400 mb-4">
+   <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm space-y-4">
+    <h2 className="text-lg font-semibold text-emerald-900">
      📦 Select Batch to Process
     </h2>
 
     {batches.length === 0 ? (
 
-     <div className="bg-[#041f17] p-4 rounded border border-yellow-600">
-
-      <p className="text-yellow-300">
+     <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+      <p className="text-emerald-700">
        ⚠️ No batches available for processing
       </p>
-
-      <p className="text-gray-400 text-sm mt-2">
-       A batch must be:
+      <p className="text-emerald-600 text-sm mt-2">
+       A batch must be created by a farmer and received by your unit.
       </p>
-
-      <ul className="text-gray-400 text-sm list-disc list-inside mt-1">
-
-       <li>Created by farmer</li>
-       <li>Received by supplier</li>
-
-      </ul>
-
      </div>
 
     ) : (
 
      <div className="space-y-3">
-
       {batches.map(batch => (
-
        <div
         key={batch.batchId}
         onClick={() => setSelectedBatch(batch)}
-        className={`p-4 rounded cursor-pointer border-2 transition ${
+        className={`p-4 rounded-xl cursor-pointer border transition ${
          selectedBatch?.batchId === batch.batchId
-         ? "bg-green-900 border-green-500"
-         : "bg-[#041f17] border-gray-600 hover:border-green-500"
+         ? "bg-emerald-50 border-emerald-300"
+         : "bg-white border-emerald-100 hover:border-emerald-300"
         }`}
        >
-
         <div className="flex justify-between items-center">
-
          <div>
-
-          <p className="font-bold">{batch.herbName}</p>
-
-          <p className="text-gray-400 text-sm">
+          <p className="font-semibold text-emerald-900">{batch.herbName}</p>
+          <p className="text-emerald-600 text-sm">
            Batch ID: {batch.batchId}
           </p>
-
-          <p className="text-gray-400 text-sm">
+          <p className="text-emerald-600 text-sm">
            Farmer: {batch.farmer}
           </p>
-
-          <p className="text-gray-400 text-sm">
+          <p className="text-emerald-600 text-sm">
            Quantity: {batch.quantity} kg
           </p>
-
          </div>
-
-         <div className="text-right">
-
-          {selectedBatch?.batchId === batch.batchId && (
-           <p className="text-green-300 font-bold">✅ Selected</p>
-          )}
-
-         </div>
-
+         {selectedBatch?.batchId === batch.batchId && (
+          <p className="text-emerald-700 font-semibold">✅ Selected</p>
+         )}
         </div>
-
        </div>
-
       ))}
-
      </div>
 
     )}
-
    </div>
-
-   {/* PROCESSING DETAILS */}
 
    {selectedBatch && (
 
-    <div className="bg-[#083d34] p-6 rounded-xl space-y-4">
-
-     <h2 className="text-xl font-bold text-green-400 mb-4">
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm space-y-4">
+     <h2 className="text-lg font-semibold text-emerald-900">
       🔧 Processing Details
      </h2>
 
-     <div>
-
-      <label className="text-gray-300 font-semibold block mb-2">
-       Processing Method
-      </label>
-
-      <select
-       value={processingMethod}
-       onChange={(e) => setProcessingMethod(e.target.value)}
-       className="w-full bg-[#041f17] border border-green-500 rounded p-3 text-white"
-      >
-
-       <option value="air-dried">Air-dried</option>
-       <option value="oven-dried">Oven-dried</option>
-       <option value="freeze-dried">Freeze-dried</option>
-       <option value="sun-dried">Sun-dried</option>
-
-      </select>
-
-     </div>
-
-     <div>
-
-      <label className="text-gray-300 font-semibold block mb-2">
-       Drying Temperature (°C)
-      </label>
-
-      <input
-       type="number"
-       placeholder="e.g., 45"
-       value={dryingTemperature}
-       onChange={(e) => setDryingTemperature(e.target.value)}
-       className="w-full bg-[#041f17] border border-green-500 rounded p-3 text-white"
-      />
-
-     </div>
-
-     <div>
-
-      <label className="text-gray-300 font-semibold block mb-2">
-       Processing Duration (days)
-      </label>
-
-      <input
-       type="text"
-       placeholder="e.g., 7 days"
-       value={processingDuration}
-       onChange={(e) => setProcessingDuration(e.target.value)}
-       className="w-full bg-[#041f17] border border-green-500 rounded p-3 text-white"
-      />
-
-     </div>
-
-     <div>
-
-      <label className="text-gray-300 font-semibold block mb-2">
-       Number of Packets to Create
-      </label>
-
-      <input
-       type="number"
-       placeholder="e.g., 100"
-       value={packetQuantity}
-       onChange={(e) => setPacketQuantity(e.target.value)}
-       className="w-full bg-[#041f17] border border-green-500 rounded p-3 text-white"
-      />
-
-      {packetQuantity && selectedBatch && (
-       <p className="text-gray-400 text-sm mt-2">
-
-        Each packet: ~{(selectedBatch.quantity / Number(packetQuantity)).toFixed(2)} kg
-
-       </p>
-      )}
-
-     </div>
-
-     {message && (
-
-      <div className={`p-3 rounded text-sm ${
-       message.includes("✅") ? "bg-green-900 text-green-300" : "bg-red-900 text-red-300"
-      }`}>
-
-       {message}
-
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+       <label className="text-xs font-semibold text-emerald-700">Processing Method</label>
+       <select
+        value={processingMethod}
+        onChange={(e)=>setProcessingMethod(e.target.value)}
+        className="mt-2 w-full border border-emerald-200 rounded-xl px-3 py-2 text-emerald-900"
+       >
+        <option value="air-dried">Air Dried</option>
+        <option value="sun-dried">Sun Dried</option>
+        <option value="shade-dried">Shade Dried</option>
+        <option value="oven-dried">Oven Dried</option>
+       </select>
       </div>
 
-     )}
+      <div>
+       <label className="text-xs font-semibold text-emerald-700">Drying Temperature (°C)</label>
+       <input
+        type="number"
+        value={dryingTemperature}
+        onChange={(e)=>setDryingTemperature(e.target.value)}
+        className="mt-2 w-full border border-emerald-200 rounded-xl px-3 py-2 text-emerald-900"
+       />
+      </div>
+
+      <div>
+       <label className="text-xs font-semibold text-emerald-700">Processing Duration</label>
+       <input
+        type="text"
+        value={processingDuration}
+        onChange={(e)=>setProcessingDuration(e.target.value)}
+        placeholder="e.g., 8 hours"
+        className="mt-2 w-full border border-emerald-200 rounded-xl px-3 py-2 text-emerald-900"
+       />
+      </div>
+
+      <div>
+       <label className="text-xs font-semibold text-emerald-700">Packets to Create</label>
+       <input
+        type="number"
+        value={packetQuantity}
+        onChange={(e)=>setPacketQuantity(e.target.value)}
+        placeholder="e.g., 50"
+        className="mt-2 w-full border border-emerald-200 rounded-xl px-3 py-2 text-emerald-900"
+       />
+      </div>
+     </div>
 
      <button
       onClick={handleProcessing}
-      disabled={submitting || !selectedBatch}
-      className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 px-4 py-3 rounded-lg font-bold text-white mt-4"
+      disabled={submitting}
+      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-semibold"
      >
-
-      {submitting ? "⏳ Processing..." : "✅ Start Processing & Create Packets"}
-
+      {submitting ? "Processing..." : "Process Batch"}
      </button>
-
     </div>
 
+   )}
+
+   {message && (
+    <div className={`p-4 rounded-xl text-sm ${message.includes("✅") ? "bg-emerald-50 text-emerald-800 border border-emerald-200" : "bg-amber-50 text-amber-800 border border-amber-200"}`}>
+     {message}
+    </div>
    )}
 
   </div>

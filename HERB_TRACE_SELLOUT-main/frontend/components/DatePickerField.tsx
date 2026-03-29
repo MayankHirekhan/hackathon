@@ -81,75 +81,75 @@ export default function DatePickerField({ label, value, onChange }: DatePickerFi
  const calendarDays = generateCalendarDays()
  const monthYear = currentMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" })
 
- return (
-  <div className="space-y-2 relative" ref={calendarRef}>
-   <label className="text-sm text-gray-300">{label}</label>
+  return (
+   <div className="space-y-2 relative" ref={calendarRef}>
+    <label className="text-sm text-emerald-700 font-medium">{label}</label>
 
    {/* INPUT FIELD */}
-   <div
-    onClick={() => setShowCalendar(!showCalendar)}
-    className="w-full p-3 rounded bg-[#041f17] border border-green-700 text-white cursor-pointer hover:border-green-500 transition flex items-center justify-between"
-   >
-    <span>{value ? formatDate(value) : "Select date"}</span>
-    <span className="text-lg">📅</span>
-   </div>
+    <div
+     onClick={() => setShowCalendar(!showCalendar)}
+     className="w-full p-3 rounded-xl bg-white border border-emerald-200 text-emerald-900 cursor-pointer hover:border-emerald-400 transition flex items-center justify-between shadow-sm"
+    >
+     <span>{value ? formatDate(value) : "Select date"}</span>
+     <span className="text-lg">📅</span>
+    </div>
 
    {/* CALENDAR POPUP */}
-   {showCalendar && (
-    <div className="absolute top-full left-0 mt-2 z-50 bg-[#041f17] border border-green-600 rounded-lg shadow-xl p-4 w-80">
+    {showCalendar && (
+     <div className="absolute top-full left-0 mt-2 z-50 bg-white border border-emerald-200 rounded-2xl shadow-xl p-4 w-80">
      {/* MONTH/YEAR HEADER */}
-     <div className="flex justify-between items-center mb-4">
-      <button
-       onClick={previousMonth}
-       className="p-2 hover:bg-[#062c21] rounded text-green-400"
-      >
-       ◀
-      </button>
-      <h3 className="text-green-400 font-semibold text-center flex-1">{monthYear}</h3>
-      <button
-       onClick={nextMonth}
-       className="p-2 hover:bg-[#062c21] rounded text-green-400"
-      >
-       ▶
-      </button>
-     </div>
+      <div className="flex justify-between items-center mb-4">
+       <button
+        onClick={previousMonth}
+        className="p-2 hover:bg-emerald-50 rounded text-emerald-600"
+       >
+        ◀
+       </button>
+       <h3 className="text-emerald-800 font-semibold text-center flex-1">{monthYear}</h3>
+       <button
+        onClick={nextMonth}
+        className="p-2 hover:bg-emerald-50 rounded text-emerald-600"
+       >
+        ▶
+       </button>
+      </div>
 
      {/* WEEKDAY HEADERS */}
-     <div className="grid grid-cols-7 gap-1 mb-2">
-      {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-       <div key={day} className="text-center text-yellow-400 text-xs font-semibold py-1">
-        {day}
-       </div>
-      ))}
-     </div>
+      <div className="grid grid-cols-7 gap-1 mb-2">
+       {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+        <div key={day} className="text-center text-emerald-600 text-xs font-semibold py-1">
+         {day}
+        </div>
+       ))}
+      </div>
 
      {/* CALENDAR DAYS */}
-     <div className="grid grid-cols-7 gap-1">
-      {calendarDays.map((day, index) => (
-       <button
-        key={index}
-        onClick={() => day && handleDayClick(day)}
-        disabled={day === null}
-        className={`
-         p-2 rounded text-sm font-medium transition
-         ${day === null ? "bg-transparent cursor-default" : "hover:bg-green-600 text-white"}
-         ${value && new Date(value).getDate() === day && new Date(value).getMonth() === currentMonth.getMonth() ? "bg-green-600 font-bold" : ""}
-        `}
-       >
-        {day}
-       </button>
-      ))}
-     </div>
+      <div className="grid grid-cols-7 gap-1">
+       {calendarDays.map((day, index) => (
+        <button
+         key={index}
+         onClick={() => day && handleDayClick(day)}
+         disabled={day === null}
+         className={`
+          p-2 rounded-lg text-sm font-medium transition
+          ${day === null ? "bg-transparent cursor-default" : "hover:bg-emerald-100 text-emerald-800"}
+          ${value && new Date(value).getDate() === day && new Date(value).getMonth() === currentMonth.getMonth() ? "bg-emerald-600 text-white font-semibold" : ""}
+         `}
+        >
+         {day}
+        </button>
+       ))}
+      </div>
 
      {/* CLOSE BUTTON */}
-     <button
-      onClick={() => setShowCalendar(false)}
-      className="w-full mt-4 p-2 bg-green-600 hover:bg-green-700 text-white rounded font-semibold text-sm"
-     >
-      Close
-     </button>
-    </div>
-   )}
-  </div>
- )
+      <button
+       onClick={() => setShowCalendar(false)}
+       className="w-full mt-4 p-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm"
+      >
+       Close
+      </button>
+     </div>
+    )}
+   </div>
+  )
 }

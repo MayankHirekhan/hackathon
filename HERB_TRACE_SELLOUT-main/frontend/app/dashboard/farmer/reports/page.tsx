@@ -57,7 +57,7 @@ load()
 },[])
 
 if(!farmer){
-return <div className="text-white p-10">Loading Reports...</div>
+return <div className="text-emerald-700 p-10">Loading Reports...</div>
 }
 
 const herbChart={
@@ -66,7 +66,7 @@ datasets:[
 {
 label:"Production (kg)",
 data:Object.values(production.herbs || {}),
-backgroundColor:"#22c55e"
+backgroundColor:"#16a34a"
 }
 ]
 }
@@ -77,23 +77,28 @@ datasets:[
 {
 label:"Regional Production",
 data:Object.values(region),
-backgroundColor:"#4ade80"
+backgroundColor:"#22c55e"
 }
 ]
 }
 
 return(
 
-<div className="space-y-10 text-white">
+<div className="space-y-10">
 
-<h1 className="text-3xl font-bold">
-Farm Reports & Analytics
-</h1>
+<div>
+ <h1 className="text-3xl font-bold text-emerald-900">
+  Farm Reports & Analytics
+ </h1>
+ <p className="text-sm text-emerald-700">
+  Track demand signals and production trends for your herbs.
+ </p>
+</div>
 
 
-<div className="bg-[#062c21] p-6 rounded">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<h3>Herb Cultivation</h3>
+<h3 className="font-semibold text-emerald-900 mb-3">Herb Cultivation</h3>
 
 <div className="h-[300px]">
 <Bar data={herbChart}/>
@@ -102,9 +107,9 @@ Farm Reports & Analytics
 </div>
 
 
-<div className="bg-[#062c21] p-6 rounded">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<h3>Regional Farmer Comparison</h3>
+<h3 className="font-semibold text-emerald-900 mb-3">Regional Farmer Comparison</h3>
 
 <div className="h-[300px]">
 <Bar data={regionChart}/>
@@ -115,30 +120,30 @@ Farm Reports & Analytics
 
 {demand && (
 
-<div className="grid grid-cols-2 gap-6">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-<div className="bg-[#062c21] p-6 rounded">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<p className="text-gray-400">Most Demanded Herb</p>
+<p className="text-emerald-600 text-sm">Most Demanded Herb</p>
 
-<p className="text-2xl text-green-400 font-bold">
+<p className="text-2xl text-emerald-900 font-bold mt-2">
 {demand.mostDemanded?.[0] || "N/A"}
 </p>
 
-<p>{demand.mostDemanded?.[1] || 0} kg produced</p>
+<p className="text-emerald-700">{demand.mostDemanded?.[1] || 0} kg produced</p>
 
 </div>
 
 
-<div className="bg-[#062c21] p-6 rounded">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<p className="text-gray-400">Least Demanded Herb</p>
+<p className="text-emerald-600 text-sm">Least Demanded Herb</p>
 
-<p className="text-2xl text-yellow-400 font-bold">
+<p className="text-2xl text-amber-600 font-bold mt-2">
 {demand.leastDemanded?.[0] || "N/A"}
 </p>
 
-<p>{demand.leastDemanded?.[1] || 0} kg produced</p>
+<p className="text-emerald-700">{demand.leastDemanded?.[1] || 0} kg produced</p>
 
 </div>
 

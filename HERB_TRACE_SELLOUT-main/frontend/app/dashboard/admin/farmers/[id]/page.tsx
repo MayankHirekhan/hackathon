@@ -72,7 +72,7 @@ export default function FarmerDetails(){
  if(loading){
 
  return(
- <div className="text-white p-10">
+ <div className="text-emerald-700 p-10">
  Loading farmer details...
  </div>
  )
@@ -82,39 +82,40 @@ export default function FarmerDetails(){
 
  return(
 
- <div className="p-10 bg-[#041f1a] min-h-screen text-white">
+ <div className="space-y-10">
 
- <h1 className="text-3xl mb-10 font-bold">
- Farmer Details
- </h1>
+ <div>
+  <h1 className="text-3xl font-bold text-emerald-900">Farmer Details</h1>
+  <p className="text-sm text-emerald-700">Profile, batch history, and verified performance.</p>
+ </div>
 
  {/* PROFILE */}
 
- <div className="bg-[#062f27] p-6 rounded-lg flex gap-6 items-center shadow-lg">
+ <div className="bg-white p-6 rounded-2xl flex gap-6 items-center border border-emerald-100 shadow-sm">
 
  <img
  src={
  farmer.profilePhoto ||
  "https://i.pravatar.cc/150"
  }
- className="w-24 h-24 rounded-full border-4 border-green-500 object-cover"
+ className="w-24 h-24 rounded-full border-2 border-emerald-200 object-cover"
  />
 
  <div>
 
- <h2 className="text-2xl font-bold">
+ <h2 className="text-2xl font-semibold text-emerald-900">
  {farmer.name}
  </h2>
 
- <p className="text-gray-300">
+ <p className="text-emerald-700">
  {farmer.email}
  </p>
 
- <p className="text-gray-200">
+ <p className="text-emerald-800">
  {farmer.farmName}
  </p>
 
- <p className="text-gray-400">
+ <p className="text-emerald-600">
  {farmer.location}
  </p>
 
@@ -124,32 +125,32 @@ export default function FarmerDetails(){
 
  {/* STATS */}
 
- <div className="grid grid-cols-4 gap-6 mt-10">
+ <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
- <div className="bg-[#062f27] p-6 rounded shadow">
- Total Harvests
- <h2 className="text-2xl mt-2">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-sm text-emerald-600">Total Harvests</p>
+ <h2 className="text-2xl font-semibold text-emerald-900 mt-2">
  {farmer.totalHarvests || 0}
  </h2>
  </div>
 
- <div className="bg-[#062f27] p-6 rounded shadow">
- Experience
- <h2 className="text-2xl mt-2">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-sm text-emerald-600">Experience</p>
+ <h2 className="text-2xl font-semibold text-emerald-900 mt-2">
  {farmer.experience} yrs
  </h2>
  </div>
 
- <div className="bg-[#062f27] p-6 rounded shadow">
- Rating
- <h2 className="text-2xl mt-2">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-sm text-emerald-600">Rating</p>
+ <h2 className="text-2xl font-semibold text-emerald-900 mt-2">
  ⭐ {farmer.rating || 0}
  </h2>
  </div>
 
- <div className="bg-[#062f27] p-6 rounded shadow">
- Batches
- <h2 className="text-2xl mt-2">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+ <p className="text-sm text-emerald-600">Batches</p>
+ <h2 className="text-2xl font-semibold text-emerald-900 mt-2">
  {batches.length}
  </h2>
  </div>
@@ -158,9 +159,9 @@ export default function FarmerDetails(){
 
  {/* HERB CHART */}
 
- <div className="bg-[#062f27] p-6 rounded mt-12 shadow">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <h2 className="text-xl mb-4">
+ <h2 className="text-xl font-semibold text-emerald-900 mb-4">
  Herb Production Analytics
  </h2>
 
@@ -168,15 +169,15 @@ export default function FarmerDetails(){
 
  <BarChart data={chart}>
 
- <XAxis dataKey="herb" stroke="#ccc"/>
+ <XAxis dataKey="herb"/>
 
- <YAxis stroke="#ccc"/>
+ <YAxis/>
 
  <Tooltip/>
 
  <Bar
  dataKey="quantity"
- fill="#22c55e"
+ fill="#16a34a"
  radius={[6,6,0,0]}
  />
 
@@ -188,9 +189,9 @@ export default function FarmerDetails(){
 
  {/* BATCH TABLE */}
 
- <div className="bg-[#062f27] p-6 rounded mt-12 shadow">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <h2 className="text-xl mb-4">
+ <h2 className="text-xl font-semibold text-emerald-900 mb-4">
  Batches Generated
  </h2>
 
@@ -198,7 +199,7 @@ export default function FarmerDetails(){
 
  <thead>
 
- <tr className="border-b border-green-700">
+ <tr className="border-b border-emerald-100 text-emerald-700">
 
  <th className="py-3 text-left">Batch</th>
  <th className="text-left">Herb</th>
@@ -214,7 +215,7 @@ export default function FarmerDetails(){
  {batches.map((b:any)=>(
  <tr
  key={b._id}
- className="border-b border-green-900 hover:bg-[#073a31]"
+ className="border-b border-emerald-50 hover:bg-emerald-50/60"
  >
 
  <td className="py-2">{b.batchId}</td>
@@ -233,9 +234,9 @@ export default function FarmerDetails(){
 
  {/* REVIEWS */}
 
- <div className="bg-[#062f27] p-6 rounded mt-12 shadow">
+ <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
- <h2 className="text-xl mb-4">
+ <h2 className="text-xl font-semibold text-emerald-900 mb-4">
  Reviews
  </h2>
 
@@ -244,25 +245,25 @@ export default function FarmerDetails(){
  farmer.reviews.map((r:any,i:number)=>(
  <div
  key={i}
- className="border-b border-green-900 py-3"
+ className="border-b border-emerald-100 py-3"
  >
 
- <p className="font-bold">
+ <p className="font-semibold text-emerald-900">
  {r.user}
  </p>
 
- <p className="text-gray-300">
+ <p className="text-emerald-700">
  {r.comment}
  </p>
 
- <p>⭐ {r.rating}</p>
+ <p className="text-emerald-600">⭐ {r.rating}</p>
 
  </div>
  ))
 
  ) : (
 
- <p className="text-gray-400">
+ <p className="text-emerald-600">
  No reviews available
  </p>
 

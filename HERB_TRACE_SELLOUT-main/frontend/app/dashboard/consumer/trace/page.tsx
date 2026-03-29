@@ -16,10 +16,6 @@ const [batchId,setBatchId] = useState("")
 const [data,setData] = useState<any>(null)
 const [status,setStatus] = useState("Waiting for scan...")
 
-/* ===========================
-START CAMERA
-=========================== */
-
 useEffect(()=>{
 
 const reader = new BrowserMultiFormatReader()
@@ -35,10 +31,6 @@ if(controlsRef.current && typeof controlsRef.current.stop === 'function'){
 }
 
 },[API])
-
-/* ===========================
-CAMERA START
-=========================== */
 
 async function startScanner(reader:BrowserMultiFormatReader){
 
@@ -83,10 +75,6 @@ setStatus("Camera permission denied")
 
 }
 
-/* ===========================
-VERIFY PRODUCT
-=========================== */
-
 async function verify(id:any){
 
 try{
@@ -111,7 +99,6 @@ if(result.batch){
 setData(result.batch)
 
 setStatus("Product verified")
-
 const history =
 JSON.parse(localStorage.getItem("traceHistory") || "[]")
 
@@ -137,10 +124,6 @@ setStatus("Verification failed")
 
 }
 
-/* ===========================
-MANUAL VERIFY
-=========================== */
-
 function manualVerify(){
 
 if(!batchId) return
@@ -151,34 +134,37 @@ verify(batchId.trim())
 
 return(
 
-<div className="p-10 text-white space-y-8">
+<div className="space-y-8">
 
-<h1 className="text-3xl text-green-400">
-Product Verification
-</h1>
+<div>
+ <h1 className="text-3xl font-bold text-emerald-900">
+  Product Verification
+ </h1>
+ <p className="text-sm text-emerald-700">
+  Scan a QR or enter a batch ID to verify herb authenticity.
+ </p>
+</div>
 
-{/* SCANNER */}
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<div className="bg-[#062c21] p-6 rounded-xl">
-
-<h2 className="text-xl mb-4">
+<h2 className="text-lg font-semibold text-emerald-900 mb-4">
 Scan QR Code
 </h2>
 
-<div className="flex gap-6 items-start">
+<div className="flex flex-col lg:flex-row gap-6 items-start">
 
 <video
 ref={videoRef}
-className="w-[420px] h-[300px] rounded border border-green-800"
+className="w-full lg:w-[420px] h-[300px] rounded-xl border border-emerald-200 bg-emerald-50"
 />
 
-<div className="space-y-3">
+<div className="space-y-3 text-sm text-emerald-700">
 
-<p className="text-gray-400 text-sm">
+<p>
 Allow camera access and place the QR code inside the frame.
 </p>
 
-<p className="text-green-400">
+<p className="text-emerald-800 font-semibold">
 Status: {status}
 </p>
 
@@ -188,26 +174,24 @@ Status: {status}
 
 </div>
 
-{/* MANUAL ENTRY */}
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-<div className="bg-[#062c21] p-6 rounded-xl">
-
-<h2 className="text-xl mb-4">
+<h2 className="text-lg font-semibold text-emerald-900 mb-4">
 Manual Batch ID
 </h2>
 
-<div className="flex gap-4">
+<div className="flex flex-col md:flex-row gap-4">
 
 <input
 value={batchId}
 onChange={(e)=>setBatchId(e.target.value)}
 placeholder="Enter Batch ID"
-className="p-3 bg-[#041f17] border border-green-800 rounded w-72"
+className="p-3 bg-white border border-emerald-200 rounded-xl w-full md:w-72 text-emerald-900"
 />
 
 <button
 onClick={manualVerify}
-className="bg-green-600 px-6 py-3 rounded hover:bg-green-500"
+className="bg-emerald-600 px-6 py-3 rounded-xl hover:bg-emerald-700 text-white font-semibold"
 >
 Verify
 </button>
@@ -216,17 +200,15 @@ Verify
 
 </div>
 
-{/* RESULT */}
-
 {data &&(
 
-<div className="bg-[#062c21] p-6 rounded-xl space-y-4">
+<div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm space-y-4">
 
-<h2 className="text-xl text-green-400">
+<h2 className="text-xl font-semibold text-emerald-900">
 Herb Information
 </h2>
 
-<div className="grid grid-cols-2 gap-6">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-emerald-700">
 
 <div>
 
@@ -250,19 +232,19 @@ Herb Information
 <div className="mt-4 space-y-4">
 
 {(data.latitude && data.longitude) && (
-<div className="bg-[#062c21] p-4 rounded-lg border border-green-600">
-<p className="text-green-400 font-semibold mb-2">📍 GPS Coordinates</p>
-<p className="text-white text-sm">Latitude: <b>{data.latitude.toFixed(6)}</b></p>
-<p className="text-white text-sm">Longitude: <b>{data.longitude.toFixed(6)}</b></p>
+<div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+<p className="text-emerald-700 font-semibold mb-2">📍 GPS Coordinates</p>
+<p className="text-emerald-900 text-sm">Latitude: <b>{data.latitude.toFixed(6)}</b></p>
+<p className="text-emerald-900 text-sm">Longitude: <b>{data.longitude.toFixed(6)}</b></p>
 </div>
 )}
 
 {data.geoImage &&(
 <div>
-<p className="text-green-400 font-semibold mb-2">🗺️ Farm Location Map</p>
+<p className="text-emerald-700 font-semibold mb-2">🗺️ Farm Location Map</p>
 <img
 src={data.geoImage}
-className="rounded border border-green-700 w-full"
+className="rounded-xl border border-emerald-100 w-full"
 />
 </div>
 )}
@@ -271,19 +253,19 @@ className="rounded border border-green-700 w-full"
 
 <div className="mt-4">
 
-<p className="text-green-400">
+<p className="text-emerald-700 font-semibold">
 Blockchain Hash
 </p>
 
-<p className="break-all text-sm">
+<p className="break-all text-sm text-emerald-900">
 {data.hash}
 </p>
 
-<p className="text-yellow-400 mt-2">
+<p className="text-emerald-600 mt-2">
 Previous Hash
 </p>
 
-<p className="break-all text-sm">
+<p className="break-all text-sm text-emerald-700">
 {data.previousHash}
 </p>
 

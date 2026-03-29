@@ -2,31 +2,33 @@ export default function FarmerDashboard(){
 
  return(
 
- <div>
+ <div className="space-y-6">
 
-  <h1 className="text-3xl font-bold mb-4">
-   Farmer Dashboard
-  </h1>
+  <div>
+   <h1 className="text-3xl font-bold text-emerald-900">
+    Farmer Dashboard
+   </h1>
 
-  <p className="text-gray-400 mb-10">
-   Select a section from the sidebar.
-  </p>
+   <p className="text-emerald-700">
+    Select a section from the sidebar to manage your harvest journey.
+   </p>
+  </div>
 
-  <div className="grid grid-cols-3 gap-6">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-   <div className="bg-[#062c21] border border-[#134e3a] rounded-xl p-6">
-    <h2>Total Harvests</h2>
-    <p className="text-3xl text-green-400 mt-2">12</p>
+   <div className="bg-white border border-emerald-100 rounded-2xl p-6 shadow-sm">
+    <p className="text-sm text-emerald-600">Total Harvests</p>
+    <p className="text-3xl font-semibold text-emerald-900 mt-2">12</p>
    </div>
 
-   <div className="bg-[#062c21] border border-[#134e3a] rounded-xl p-6">
-    <h2>Batches Created</h2>
-    <p className="text-3xl text-green-400 mt-2">5</p>
+   <div className="bg-white border border-emerald-100 rounded-2xl p-6 shadow-sm">
+    <p className="text-sm text-emerald-600">Batches Created</p>
+    <p className="text-3xl font-semibold text-emerald-900 mt-2">5</p>
    </div>
 
-   <div className="bg-[#062c21] border border-[#134e3a] rounded-xl p-6">
-    <h2>QR Codes Generated</h2>
-    <p className="text-3xl text-green-400 mt-2">7</p>
+   <div className="bg-white border border-emerald-100 rounded-2xl p-6 shadow-sm">
+    <p className="text-sm text-emerald-600">QR Codes Generated</p>
+    <p className="text-3xl font-semibold text-emerald-900 mt-2">7</p>
    </div>
 
   </div>

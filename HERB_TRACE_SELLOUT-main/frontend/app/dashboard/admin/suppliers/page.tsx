@@ -28,129 +28,129 @@ export default function SuppliersPage(){
 
  return(
 
- <div className="p-10 bg-[#041f1a] min-h-screen text-white">
+ <div className="space-y-6">
 
- <h1 className="text-3xl mb-8 font-bold">
- Suppliers
- </h1>
+  <div>
+   <h1 className="text-3xl font-bold text-emerald-900">Suppliers</h1>
+   <p className="text-sm text-emerald-700">Track processing partners and distribution readiness.</p>
+  </div>
 
- <div className="bg-[#062f27] rounded-xl overflow-hidden shadow-lg">
+  <div className="bg-white rounded-2xl border border-emerald-100 shadow-sm overflow-hidden">
 
- <table className="w-full text-sm">
+  <table className="w-full text-sm">
 
- <thead>
+  <thead>
 
- <tr className="border-b border-green-900 text-left">
+  <tr className="bg-emerald-50 text-emerald-800 text-left">
 
- <th className="p-4">Profile</th>
- <th className="p-4">Name</th>
- <th className="p-4">Company</th>
- <th className="p-4">Location</th>
- <th className="p-4">Rating</th>
- <th className="p-4">Actions</th>
+  <th className="p-4">Profile</th>
+  <th className="p-4">Name</th>
+  <th className="p-4">Company</th>
+  <th className="p-4">Location</th>
+  <th className="p-4">Rating</th>
+  <th className="p-4">Actions</th>
 
- </tr>
+  </tr>
 
- </thead>
-
-
- <tbody>
-
- {suppliers.map((s)=>(
-
- <tr
- key={s._id}
- className="border-b border-green-900 hover:bg-[#073a31] transition"
- >
-
- {/* PROFILE PHOTO */}
-
- <td className="p-4">
-
- <img
- src={
- s.profilePhoto ||
- "/uploads/default-supplier.png"
- }
- className="w-10 h-10 rounded-full border border-green-500 object-cover"
- />
-
- </td>
+  </thead>
 
 
- {/* NAME */}
+  <tbody>
 
- <td className="p-4 font-semibold">
+  {suppliers.map((s)=>(
 
- {s.name}
+  <tr
+  key={s._id}
+  className="border-b border-emerald-100 hover:bg-emerald-50/60 transition"
+  >
 
- </td>
+  {/* PROFILE PHOTO */}
 
+  <td className="p-4">
 
- {/* COMPANY */}
+  <img
+  src={
+  s.profilePhoto ||
+  "/uploads/default-supplier.png"
+  }
+  className="w-10 h-10 rounded-full border border-emerald-200 object-cover"
+  />
 
- <td className="p-4">
-
- {s.companyName}
-
- </td>
-
-
- {/* LOCATION */}
-
- <td className="p-4 text-gray-300">
-
- {s.location}
-
- </td>
+  </td>
 
 
- {/* RATING */}
+  {/* NAME */}
 
- <td className="p-4">
+  <td className="p-4 font-semibold text-emerald-900">
 
- ⭐ {s.rating || 0}
+  {s.name}
 
- </td>
-
-
- {/* ACTIONS */}
-
- <td className="p-4 flex gap-3">
-
- <a
- href={`/dashboard/admin/suppliers/${s._id}`}
- className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-xs"
- >
-
- View Details
-
- </a>
+  </td>
 
 
- <button
- onClick={()=>banSupplier(s._id)}
- className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs"
- >
+  {/* COMPANY */}
 
- Ban
+  <td className="p-4">
 
- </button>
+  {s.companyName}
 
- </td>
+  </td>
 
- </tr>
 
- ))}
+  {/* LOCATION */}
 
- </tbody>
+  <td className="p-4 text-emerald-700">
 
- </table>
+  {s.location}
 
- </div>
+  </td>
 
- </div>
 
- )
+  {/* RATING */}
 
+  <td className="p-4">
+
+  ⭐ {s.rating || 0}
+
+  </td>
+
+
+  {/* ACTIONS */}
+
+  <td className="p-4 flex flex-wrap gap-2">
+
+  <a
+  href={`/dashboard/admin/suppliers/${s._id}`}
+  className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded-lg text-xs font-semibold"
+  >
+
+  View Details
+
+  </a>
+
+
+  <button
+  onClick={()=>banSupplier(s._id)}
+  className="bg-white border border-red-200 text-red-700 hover:bg-red-50 px-3 py-1 rounded-lg text-xs font-semibold"
+  >
+
+  Ban
+
+  </button>
+
+  </td>
+
+  </tr>
+
+  ))}
+
+  </tbody>
+
+  </table>
+
+  </div>
+
+  </div>
+
+  )
 }

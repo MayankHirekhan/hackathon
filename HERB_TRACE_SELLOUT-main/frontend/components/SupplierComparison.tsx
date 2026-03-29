@@ -27,36 +27,36 @@ export default function SupplierComparison({data}:any){
 
  const values = data?.length ? data.map((s:any)=>s.batches) : [0]
 
- const chartData={
-  labels,
-  datasets:[
-   {
-    label:"Batches Processed",
-    data:values,
-    backgroundColor:"#4ade80"
-   }
-  ]
- }
+  const chartData={
+   labels,
+   datasets:[
+    {
+     label:"Batches Processed",
+     data:values,
+     backgroundColor:"#22c55e"
+    }
+   ]
+  }
 
  const options={
   responsive:true,
   maintainAspectRatio:false
  }
 
- return(
+  return(
 
- <div className="bg-[#083d34] p-6 rounded-xl">
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-  <h2 className="text-green-400 mb-4">
-   Supplier Comparison
-  </h2>
+   <h2 className="text-emerald-900 font-semibold mb-4">
+    Supplier Comparison
+   </h2>
 
-  <div className="h-[300px]">
-   <Bar data={chartData} options={options}/>
+   <div className="h-[300px]">
+    <Bar data={chartData} options={options}/>
+   </div>
+
   </div>
 
- </div>
-
- )
+  )
 
 }

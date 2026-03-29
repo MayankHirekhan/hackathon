@@ -63,7 +63,7 @@ export default function TracePage(){
 
  if(loading){
  return(
-  <div className="p-10 text-white">
+  <div className="p-10 text-emerald-700">
    Loading trace data...
   </div>
  )
@@ -71,7 +71,7 @@ export default function TracePage(){
 
  if(error){
  return(
-  <div className="p-10 text-red-400">
+  <div className="p-10 text-red-500">
    {error}
   </div>
  )
@@ -79,7 +79,7 @@ export default function TracePage(){
 
  if(!batch){
  return(
-  <div className="p-10 text-red-400">
+  <div className="p-10 text-red-500">
    Batch data not found
   </div>
  )
@@ -88,82 +88,84 @@ export default function TracePage(){
 
  return(
 
- <div className="min-h-screen bg-[#041f17] text-white p-10">
+ <div className="min-h-screen bg-emerald-50 text-emerald-950 p-10">
 
- <h1 className="text-3xl text-green-400 mb-6">
- 🌿 Herb Traceability
- </h1>
-
-
- {/* BATCH INFO */}
-
- <div className="bg-[#062c21] p-6 rounded-xl space-y-3">
-
- <p><b>Herb :</b> {batch.herbName}</p>
-
- <p><b>Batch ID :</b> {batch.batchId}</p>
-
- {packet && (
- <p><b>Packet ID :</b> {packet.packetId}</p>
- )}
-
- <p><b>Farmer :</b> {farmer?.name || batch.farmer}</p>
-
- <p><b>Supplier :</b> {supplier?.name || batch.supplierName}</p>
-
- <p><b>Harvest Date :</b> {batch.harvestDate}</p>
-
- <p><b>Quantity :</b> {batch.quantity} kg</p>
-
- <p><b>Location :</b> {batch.location}</p>
-
- </div>
-
-
- {/* GPS & COORDINATES */}
-
- <div className="mt-6 space-y-4">
-
- {(batch.latitude && batch.longitude) && (
-  <div className="bg-[#062c21] p-4 rounded-lg border border-green-600">
-   <p className="text-green-400 font-semibold mb-2">📍 GPS Coordinates</p>
-   <p className="text-white text-sm">Latitude: <b>{batch.latitude.toFixed(6)}</b></p>
-   <p className="text-white text-sm">Longitude: <b>{batch.longitude.toFixed(6)}</b></p>
-  </div>
- )}
-
- {batch.geoImage && (
+ <div className="max-w-4xl mx-auto space-y-6">
   <div>
-   <p className="text-green-400 font-semibold mb-2">🗺️ Farm Location Map</p>
-   <img
-    src={batch.geoImage}
-    className="rounded-lg border border-green-700 w-full max-w-xl"
-   />
+   <h1 className="text-3xl font-bold text-emerald-900">
+   🌿 Herb Traceability
+   </h1>
+   <p className="text-sm text-emerald-700">
+    Verified transparency from farm to shelf for India’s herbal supply chain.
+   </p>
   </div>
- )}
-
- </div>
 
 
- {/* BLOCKCHAIN */}
+  <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm space-y-2">
 
- <div className="mt-6 bg-[#062c21] p-4 rounded">
+  <p><b>Herb :</b> {batch.herbName}</p>
 
- <p className="text-green-400">
- Blockchain Hash
- </p>
+  <p><b>Batch ID :</b> {batch.batchId}</p>
 
- <p className="break-all text-sm">
- {batch.hash}
- </p>
+  {packet && (
+  <p><b>Packet ID :</b> {packet.packetId}</p>
+  )}
 
- <p className="text-yellow-400 mt-2">
- Previous Hash
- </p>
+  <p><b>Farmer :</b> {farmer?.name || batch.farmer}</p>
 
- <p className="break-all text-sm">
- {batch.previousHash}
- </p>
+  <p><b>Supplier :</b> {supplier?.name || batch.supplierName}</p>
+
+  <p><b>Harvest Date :</b> {batch.harvestDate}</p>
+
+  <p><b>Quantity :</b> {batch.quantity} kg</p>
+
+  <p><b>Location :</b> {batch.location}</p>
+
+  </div>
+
+
+  <div className="space-y-4">
+
+  {(batch.latitude && batch.longitude) && (
+   <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+    <p className="text-emerald-700 font-semibold mb-2">📍 GPS Coordinates</p>
+    <p className="text-emerald-900 text-sm">Latitude: <b>{batch.latitude.toFixed(6)}</b></p>
+    <p className="text-emerald-900 text-sm">Longitude: <b>{batch.longitude.toFixed(6)}</b></p>
+   </div>
+  )}
+
+  {batch.geoImage && (
+   <div>
+    <p className="text-emerald-700 font-semibold mb-2">🗺️ Farm Location Map</p>
+    <img
+     src={batch.geoImage}
+     className="rounded-xl border border-emerald-100 w-full"
+    />
+   </div>
+  )}
+
+  </div>
+
+
+  <div className="bg-white p-4 rounded-2xl border border-emerald-100 shadow-sm">
+
+  <p className="text-emerald-700 font-semibold">
+  Blockchain Hash
+  </p>
+
+  <p className="break-all text-sm text-emerald-900">
+  {batch.hash}
+  </p>
+
+  <p className="text-emerald-600 mt-2">
+  Previous Hash
+  </p>
+
+  <p className="break-all text-sm text-emerald-700">
+  {batch.previousHash}
+  </p>
+
+  </div>
 
  </div>
 

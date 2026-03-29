@@ -10,133 +10,133 @@ export default function SupplierCertificate({supplier}:any){
  const issueDate =
  new Date().toLocaleDateString()
 
- return(
+  return(
 
- <div className="bg-[#062c21] border-[6px] border-green-700 rounded-xl p-10 shadow-xl">
+  <div className="bg-white border border-emerald-200 rounded-3xl p-10 shadow-sm">
 
- <div className="text-center mb-8">
+  <div className="text-center mb-8">
 
- <h1 className="text-3xl font-bold text-green-400">
- HERBTRACE AUTHORITY
- </h1>
+  <h1 className="text-3xl font-bold text-emerald-900">
+  HerbTracking Authority
+  </h1>
 
- <p className="text-gray-300 text-sm">
- Herbal Supply Chain Verification Board
- </p>
+  <p className="text-emerald-700 text-sm">
+  AYUSH-aligned Supply Chain Verification Board
+  </p>
 
- </div>
-
-
- <h2 className="text-center text-2xl font-semibold mb-10">
- Supplier Authenticity Certificate
- </h2>
+  </div>
 
 
- <div className="text-center space-y-4 text-lg">
-
- <p>This certificate confirms that</p>
-
- <p className="text-3xl font-bold text-green-400">
- {supplier.name}
- </p>
-
- <p>representing</p>
-
- <p className="text-xl font-semibold">
- {supplier.companyName}
- </p>
-
- <p>located in</p>
-
- <p className="text-xl">
- {supplier.location}
- </p>
-
- <p>
- is an authorized herbal supply chain distributor
- within the HerbTrace Blockchain Network.
- </p>
-
- </div>
+  <h2 className="text-center text-2xl font-semibold mb-10 text-emerald-800">
+  Supplier Authenticity Certificate
+  </h2>
 
 
- <div className="grid grid-cols-2 gap-6 mt-10 text-sm">
+  <div className="text-center space-y-4 text-lg text-emerald-900">
 
- <div>
- <p className="text-gray-400">Certificate ID</p>
- <p className="font-semibold">{certificateId}</p>
- </div>
+  <p>This certificate confirms that</p>
 
- <div>
- <p className="text-gray-400">Issue Date</p>
- <p className="font-semibold">{issueDate}</p>
- </div>
+  <p className="text-3xl font-bold text-emerald-700">
+  {supplier.name}
+  </p>
 
- <div>
- <p className="text-gray-400">Experience</p>
- <p className="font-semibold">
- {supplier.experience} years
- </p>
- </div>
+  <p>representing</p>
 
- <div>
- <p className="text-gray-400">Rating</p>
- <p className="font-semibold">
- ⭐ {supplier.rating}
- </p>
- </div>
+  <p className="text-xl font-semibold">
+  {supplier.companyName}
+  </p>
 
- </div>
+  <p>located in</p>
 
+  <p className="text-xl">
+  {supplier.location}
+  </p>
 
- <div className="flex justify-between items-end mt-12">
+  <p>
+  is an authorized herbal supply chain distributor
+  within the HerbTracking India national network.
+  </p>
+
+  </div>
 
 
- <div>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 text-sm">
 
- <p className="text-gray-400 text-sm">
- Authorized By
- </p>
+  <div>
+  <p className="text-emerald-600">Certificate ID</p>
+  <p className="font-semibold text-emerald-900">{certificateId}</p>
+  </div>
 
- <p className="text-xl font-semibold mt-1">
- HerbTrace Authority
- </p>
+  <div>
+  <p className="text-emerald-600">Issue Date</p>
+  <p className="font-semibold text-emerald-900">{issueDate}</p>
+  </div>
 
- <div className="mt-2 border-t border-green-700 w-40"></div>
+  <div>
+  <p className="text-emerald-600">Experience</p>
+  <p className="font-semibold text-emerald-900">
+  {supplier.experience} years
+  </p>
+  </div>
 
- </div>
+  <div>
+  <p className="text-emerald-600">Rating</p>
+  <p className="font-semibold text-emerald-900">
+  ⭐ {supplier.rating}
+  </p>
+  </div>
+
+  </div>
 
 
- <div className="text-center">
-
- <div className="w-24 h-24 rounded-full border-4 border-red-600 flex items-center justify-center text-red-500 text-xs font-bold rotate-12">
- VERIFIED
- </div>
-
- <p className="text-xs text-gray-400 mt-2">
- Official Seal
- </p>
-
- </div>
+  <div className="flex flex-col md:flex-row justify-between items-start md:items-end mt-12 gap-8">
 
 
- <div className="text-center">
+  <div>
 
- <p className="text-gray-400 text-sm mb-2">
- Verification QR
- </p>
+  <p className="text-emerald-600 text-sm">
+  Authorized By
+  </p>
 
- <QRCodeCanvas
- value={`http://localhost:3000/trace/supplier/${supplier._id}`}
- size={90}
- />
+  <p className="text-xl font-semibold mt-1 text-emerald-900">
+  HerbTracking Authority
+  </p>
 
- </div>
+  <div className="mt-2 border-t border-emerald-300 w-40"></div>
 
- </div>
+  </div>
 
- </div>
 
- )
+  <div className="text-center">
+
+  <div className="w-24 h-24 rounded-full border-2 border-emerald-600 flex items-center justify-center text-emerald-700 text-xs font-bold rotate-3 bg-emerald-50">
+  VERIFIED
+  </div>
+
+  <p className="text-xs text-emerald-600 mt-2">
+  Official Seal
+  </p>
+
+  </div>
+
+
+  <div className="text-center">
+
+  <p className="text-emerald-600 text-sm mb-2">
+  Verification QR
+  </p>
+
+  <QRCodeCanvas
+  value={`http://localhost:3000/trace/supplier/${supplier._id}`}
+  size={90}
+  />
+
+  </div>
+
+  </div>
+
+  </div>
+
+  )
 
 }

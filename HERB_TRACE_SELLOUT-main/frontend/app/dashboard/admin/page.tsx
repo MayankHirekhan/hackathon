@@ -29,10 +29,6 @@ export default function AdminDashboard(){
   email:"admin@herbtrace.com"
  })
 
-/* ===========================
-   LOAD FARMERS
-=========================== */
-
  useEffect(()=>{
 
  fetch("http://localhost:5000/api/admin/farmers")
@@ -45,10 +41,6 @@ export default function AdminDashboard(){
  })
 
  },[])
-
-/* ===========================
-   LOAD SUPPLIERS
-=========================== */
 
  useEffect(()=>{
 
@@ -63,10 +55,6 @@ export default function AdminDashboard(){
 
  },[])
 
-/* ===========================
-   FARMER PERSONAL CHART
-=========================== */
-
  useEffect(()=>{
 
  if(!selectedFarmer) return
@@ -77,10 +65,6 @@ export default function AdminDashboard(){
 
  },[selectedFarmer])
 
-/* ===========================
-   FARMER COMPARISON
-=========================== */
-
  useEffect(()=>{
 
  fetch("http://localhost:5000/api/admin/farmers/comparison")
@@ -88,10 +72,6 @@ export default function AdminDashboard(){
  .then(setFarmerComparison)
 
  },[])
-
-/* ===========================
-   SUPPLIER PERSONAL
-=========================== */
 
  useEffect(()=>{
 
@@ -103,10 +83,6 @@ export default function AdminDashboard(){
 
  },[selectedSupplier])
 
-/* ===========================
-   SUPPLIER COMPARISON
-=========================== */
-
  useEffect(()=>{
 
  fetch("http://localhost:5000/api/admin/suppliers/comparison")
@@ -115,161 +91,113 @@ export default function AdminDashboard(){
 
  },[])
 
-/* ===========================
-   UI
-=========================== */
-
  return(
 
- <div className="p-10 bg-[#041f1a] min-h-screen text-white">
+ <div className="space-y-10">
 
- {/* ADMIN PROFILE */}
+  <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-emerald-100 p-6 rounded-2xl shadow-sm">
+   <div className="flex items-center gap-4">
+    <div className="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
+     🛡️
+    </div>
+    <div>
+     <h2 className="text-xl font-semibold text-emerald-900">{admin.name}</h2>
+     <p className="text-sm text-emerald-700">{admin.email}</p>
+     <p className="text-xs text-emerald-500">National Herb Network Control Room</p>
+    </div>
+   </div>
+   <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+    Logout
+   </button>
+  </div>
 
- <div className="flex items-center justify-between mb-10 bg-[#062f27] p-6 rounded">
+  <section className="space-y-4">
+   <div className="flex flex-wrap items-center justify-between gap-3">
+    <div>
+     <h2 className="text-2xl font-semibold text-emerald-900">Farmer Analytics</h2>
+     <p className="text-sm text-emerald-700">Monitor harvest activity and state-wise performance.</p>
+    </div>
+    <select
+     className="bg-white border border-emerald-200 px-3 py-2 rounded-lg text-emerald-900 shadow-sm"
+     value={selectedFarmer}
+     onChange={(e)=>setSelectedFarmer(e.target.value)}
+    >
+     {farmers.map(f=>(
+      <option key={f._id}>{f.name}</option>
+     ))}
+    </select>
+   </div>
 
- <div className="flex items-center gap-5">
+   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+     <h3 className="mb-3 font-semibold text-emerald-800">Farmer Personal Harvest</h3>
+     <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={farmerPersonal}>
+       <XAxis dataKey="herb"/>
+       <YAxis/>
+       <Tooltip/>
+       <Bar dataKey="quantity" fill="#16a34a"/>
+      </BarChart>
+     </ResponsiveContainer>
+    </div>
 
- <img
- src="https://i.pravatar.cc/150?img=60"
- className="w-16 h-16 rounded-full border-4 border-green-500"
- />
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+     <h3 className="mb-3 font-semibold text-emerald-800">Farmer Comparison</h3>
+     <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={farmerComparison}>
+       <XAxis dataKey="name"/>
+       <YAxis/>
+       <Tooltip/>
+       <Bar dataKey="totalHarvest" fill="#22c55e"/>
+      </BarChart>
+     </ResponsiveContainer>
+    </div>
+   </div>
+  </section>
 
- <div>
- <h2 className="text-xl">{admin.name}</h2>
- <p className="text-gray-300">{admin.email}</p>
- </div>
+  <section className="space-y-4">
+   <div className="flex flex-wrap items-center justify-between gap-3">
+    <div>
+     <h2 className="text-2xl font-semibold text-emerald-900">Supplier Analytics</h2>
+     <p className="text-sm text-emerald-700">Track processing throughput and distribution readiness.</p>
+    </div>
+    <select
+     className="bg-white border border-emerald-200 px-3 py-2 rounded-lg text-emerald-900 shadow-sm"
+     value={selectedSupplier}
+     onChange={(e)=>setSelectedSupplier(e.target.value)}
+    >
+     {suppliers.map(s=>(
+      <option key={s._id}>{s.name}</option>
+     ))}
+    </select>
+   </div>
 
- </div>
+   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+     <h3 className="mb-3 font-semibold text-emerald-800">Supplier Personal Processing</h3>
+     <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={supplierPersonal}>
+       <XAxis dataKey="herb"/>
+       <YAxis/>
+       <Tooltip/>
+       <Bar dataKey="quantity" fill="#16a34a"/>
+      </BarChart>
+     </ResponsiveContainer>
+    </div>
 
- <button className="bg-red-500 px-4 py-2 rounded">
- Logout
- </button>
-
- </div>
-
- {/* FARMER ANALYTICS */}
-
- <h2 className="text-2xl mb-4">Farmer Analytics</h2>
-
- <select
- className="bg-[#062f27] p-3 mb-6 rounded"
- value={selectedFarmer}
- onChange={(e)=>setSelectedFarmer(e.target.value)}
- >
-
- {farmers.map(f=>(
- <option key={f._id}>{f.name}</option>
- ))}
-
- </select>
-
- <div className="grid grid-cols-2 gap-6 mb-12">
-
- {/* PERSONAL */}
-
- <div className="bg-[#062f27] p-6 rounded">
-
- <h3 className="mb-3">Farmer Personal Harvest</h3>
-
- <ResponsiveContainer width="100%" height={300}>
-
- <BarChart data={farmerPersonal}>
-
- <XAxis dataKey="herb"/>
- <YAxis/>
- <Tooltip/>
- <Bar dataKey="quantity" fill="#22c55e"/>
-
- </BarChart>
-
- </ResponsiveContainer>
-
- </div>
-
- {/* COMPARISON */}
-
- <div className="bg-[#062f27] p-6 rounded">
-
- <h3 className="mb-3">Farmer Comparison</h3>
-
- <ResponsiveContainer width="100%" height={300}>
-
- <BarChart data={farmerComparison}>
-
- <XAxis dataKey="name"/>
- <YAxis/>
- <Tooltip/>
- <Bar dataKey="totalHarvest" fill="#22c55e"/>
-
- </BarChart>
-
- </ResponsiveContainer>
-
- </div>
-
- </div>
-
- {/* SUPPLIER ANALYTICS */}
-
- <h2 className="text-2xl mb-4">Supplier Analytics</h2>
-
- <select
- className="bg-[#062f27] p-3 mb-6 rounded"
- value={selectedSupplier}
- onChange={(e)=>setSelectedSupplier(e.target.value)}
- >
-
- {suppliers.map(s=>(
- <option key={s._id}>{s.name}</option>
- ))}
-
- </select>
-
- <div className="grid grid-cols-2 gap-6">
-
- {/* PERSONAL */}
-
- <div className="bg-[#062f27] p-6 rounded">
-
- <h3 className="mb-3">Supplier Personal Processing</h3>
-
- <ResponsiveContainer width="100%" height={300}>
-
- <BarChart data={supplierPersonal}>
-
- <XAxis dataKey="herb"/>
- <YAxis/>
- <Tooltip/>
- <Bar dataKey="quantity" fill="#22c55e"/>
-
- </BarChart>
-
- </ResponsiveContainer>
-
- </div>
-
- {/* COMPARISON */}
-
- <div className="bg-[#062f27] p-6 rounded">
-
- <h3 className="mb-3">Supplier Comparison</h3>
-
- <ResponsiveContainer width="100%" height={300}>
-
- <BarChart data={supplierComparison}>
-
- <XAxis dataKey="name"/>
- <YAxis/>
- <Tooltip/>
- <Bar dataKey="processed" fill="#22c55e"/>
-
- </BarChart>
-
- </ResponsiveContainer>
-
- </div>
-
- </div>
+    <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+     <h3 className="mb-3 font-semibold text-emerald-800">Supplier Comparison</h3>
+     <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={supplierComparison}>
+       <XAxis dataKey="name"/>
+       <YAxis/>
+       <Tooltip/>
+       <Bar dataKey="processed" fill="#22c55e"/>
+      </BarChart>
+     </ResponsiveContainer>
+    </div>
+   </div>
+  </section>
 
  </div>
 

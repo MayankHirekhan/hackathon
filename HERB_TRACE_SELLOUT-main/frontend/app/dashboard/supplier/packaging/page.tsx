@@ -30,21 +30,14 @@ export default function PackagingPage() {
   const [message, setMessage] = useState("")
   const [submitting, setSubmitting] = useState(false)
 
-  /* ===============================
-     LOAD BATCHES
-  =============================== */
-
   useEffect(() => {
 
-    /* Fetch only TESTED batches ready for packaging */
     fetch(`${API}/api/batches`)
       .then(res => res.json())
       .then(data => {
 
         if (Array.isArray(data)) {
-          /* Filter to only show "tested" batches */
           const testedBatches = data.filter((b: any) => b.status === "tested")
-          console.log(`📦 Found ${testedBatches.length} batches ready for packaging`)
           setBatches(testedBatches)
         }
 
@@ -53,10 +46,6 @@ export default function PackagingPage() {
 
   }, [API])
 
-
-  /* ===============================
-     GENERATE PACKETS
-  =============================== */
 
   const generatePackets = async () => {
 
@@ -99,7 +88,6 @@ export default function PackagingPage() {
     setLoading(false)
   }
 
-  /* MARK BATCH AS PACKAGED */
   const markAsPackaged = async () => {
     if (!selectedBatch) return
 
@@ -117,7 +105,6 @@ export default function PackagingPage() {
 
       if (data.success) {
         setMessage(`✅ Batch ${selectedBatch.batchId} marked as packaged!`)
-        /* Remove from list and clear */
         setBatches(batches.filter(b => b.batchId !== selectedBatch.batchId))
         setSelectedBatch(null)
         setPackets([])
@@ -135,23 +122,24 @@ export default function PackagingPage() {
 
   return (
 
-    <div className="p-8 text-white">
+    <div className="space-y-6">
 
-      <h1 className="text-3xl text-green-400 mb-6">
-        Packaging & QR Generation
-      </h1>
+      <div>
+        <h1 className="text-3xl font-bold text-emerald-900">
+          Packaging & QR Generation
+        </h1>
+        <p className="text-sm text-emerald-700">
+          Create consumer-ready packets and print QR codes for retail distribution.
+        </p>
+      </div>
 
 
-      {/* ===============================
-         SELECT BATCH
-      =============================== */}
+      <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-      <div className="bg-[#083d34] p-6 rounded-xl mb-6">
-
-        <h2 className="text-xl mb-4">Select Batch</h2>
+        <h2 className="text-lg font-semibold text-emerald-900 mb-4">Select Batch</h2>
 
         <select
-          className="w-full p-3 rounded bg-[#062f27]"
+          className="w-full p-3 rounded-xl bg-white border border-emerald-200 text-emerald-900"
           onChange={(e) => {
 
             const batch = batches.find(
@@ -184,33 +172,24 @@ export default function PackagingPage() {
       </div>
 
 
-
-      {/* ===============================
-         BATCH DETAILS
-      =============================== */}
-
       {selectedBatch && (
 
-        <div className="bg-[#083d34] p-6 rounded-xl mb-6">
+        <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
 
-          <h2 className="text-xl text-green-400 mb-4">
+          <h2 className="text-lg font-semibold text-emerald-900 mb-4">
             Batch Information
           </h2>
 
-          <p><b>Batch ID:</b> {selectedBatch.batchId}</p>
-          <p><b>Herb:</b> {selectedBatch.herbName}</p>
-          <p><b>Farmer:</b> {selectedBatch.farmer}</p>
-          <p><b>Quantity:</b> {selectedBatch.quantity} kg</p>
-          <p><b>Location:</b> {selectedBatch.location}</p>
-
-
-          {/* ===============================
-             FARMER BATCH QR
-          =============================== */}
+          <div className="text-sm text-emerald-700 space-y-1">
+            <p><b>Batch ID:</b> {selectedBatch.batchId}</p>
+            <p><b>Herb:</b> {selectedBatch.herbName}</p>
+            <p><b>Farmer:</b> {selectedBatch.farmer}</p>
+            <p><b>Quantity:</b> {selectedBatch.quantity} kg</p>
+            <p><b>Location:</b> {selectedBatch.location}</p>
+          </div>
 
           <div className="mt-6">
-
-            <p className="mb-2 text-green-400">
+            <p className="mb-2 text-emerald-700 font-semibold">
               Farmer Batch QR
             </p>
 
@@ -218,16 +197,10 @@ export default function PackagingPage() {
               value={`${BASE}/api/trace/${selectedBatch.batchId}`}
               size={120}
             />
-
           </div>
 
-
-          {/* ===============================
-             GENERATE PACKETS BUTTON
-          =============================== */}
-
           <button
-            className="bg-green-600 px-4 py-2 rounded mt-6 hover:bg-green-700 transition"
+            className="bg-emerald-600 px-4 py-2 rounded-xl mt-6 hover:bg-emerald-700 transition text-white font-semibold"
             onClick={generatePackets}
             disabled={loading}
           >
@@ -237,76 +210,42 @@ export default function PackagingPage() {
           </button>
 
         </div>
-
       )}
 
-
-
-      {/* ===============================
-         PACKET QR GRID
-      =============================== */}
 
       {packets.length > 0 && (
 
-        <div className="bg-[#083d34] p-6 rounded-xl">
-
-          <h2 className="text-xl text-green-400 mb-4">
-            Generated Packets
+        <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm">
+          <h2 className="text-lg font-semibold text-emerald-900 mb-4">
+            Packet QR Codes
           </h2>
 
-          <div className="grid grid-cols-5 gap-4">
-
-            {packets.map(packet => (
-
-              <div
-                key={packet.packetId}
-                className="bg-[#062f27] p-4 rounded text-center"
-              >
-
-                <QRCodeCanvas
-                  value={`${BASE}/api/trace/${packet.packetId}`}
-                  size={100}
-                />
-
-                <p className="text-xs mt-2 break-all">
-                  {packet.packetId}
-                </p>
-
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {packets.map((packet) => (
+              <div key={packet.packetId} className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                <p className="text-xs text-emerald-700 mb-2">{packet.packetId}</p>
+                <QRCodeCanvas value={`${BASE}/api/trace/${packet.packetId}`} size={110} />
+                <p className="text-xs text-emerald-600 mt-2">{packet.weight} g</p>
               </div>
-
             ))}
-
           </div>
 
+          <button
+            className="w-full bg-emerald-800 hover:bg-emerald-900 text-white px-4 py-3 rounded-xl mt-6 font-semibold"
+            onClick={markAsPackaged}
+            disabled={submitting}
+          >
+            {submitting ? "Updating..." : "Mark Batch as Packaged"}
+          </button>
         </div>
-
       )}
 
-      {/* MESSAGE */}
       {message && (
-        <div className={`mt-6 p-4 rounded text-center ${
-          message.includes("✅") ? "bg-green-900 text-green-300" : "bg-red-900 text-red-300"
-        }`}>
+        <div className={`p-4 rounded-xl text-sm ${message.includes("✅") ? "bg-emerald-50 text-emerald-800 border border-emerald-200" : "bg-amber-50 text-amber-800 border border-amber-200"}`}>
           {message}
         </div>
       )}
 
-      {/* MARK AS PACKAGED BUTTON */}
-      {packets.length > 0 && selectedBatch && (
-        <div className="mt-6 text-center">
-          <button
-            onClick={markAsPackaged}
-            disabled={submitting}
-            className="bg-yellow-600 hover:bg-yellow-700 disabled:bg-gray-600 px-8 py-3 rounded font-bold text-white transition"
-          >
-            {submitting ? "Processing..." : "✅ Mark Batch as Packaged"}
-          </button>
-          <p className="text-gray-400 text-sm mt-2">Ready to send to distribution</p>
-        </div>
-      )}
-
     </div>
-
   )
-
 }
