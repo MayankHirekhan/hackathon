@@ -54,7 +54,7 @@ export default function SupplierCertificate({supplier}:any){
 
   <p>
   is an authorized herbal supply chain distributor
-  within the HerbTracking national network.
+  within the HerbTracking India national network.
   </p>
 
   </div>

@@ -245,7 +245,7 @@ export default function ReceivePage(){
   }catch(err){
 
    console.error(err)
-   setMessage("❌ Batch receipt failed: server error")
+   setMessage("❌ Batch receipt failed: server error. Please retry in a few minutes.")
 
   }
 

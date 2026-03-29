@@ -109,7 +109,7 @@ export default function CertificatePage(){
 
  <p>
  is a verified herbal producer within the
- HerbTracking national traceability network.
+ HerbTracking India national traceability network.
  </p>
 
  </div>
